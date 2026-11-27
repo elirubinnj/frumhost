@@ -278,6 +278,120 @@
     .preview-scaler { transform: none !important; width: 100% !important; margin: 0 !important; }
     .outer-frame { width: 100% !important; height: 10.44in !important; box-shadow: none !important; page-break-after: avoid !important; break-inside: avoid !important; }
   }
+
+  .cp-right { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+  .tier-pill {
+    font-size: 11.5px; font-weight: 800; padding: 5px 11px; border-radius: 999px;
+    border: 1.5px solid #D5C59A; background: #FAF7F0; color: #1B2A4A;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+    transition: transform .08s ease, background .15s ease;
+    font-family: inherit;
+  }
+  .tier-pill:active { transform: scale(0.97); }
+  .tier-pill.is-family { background: #EEF2FF; color: #3730A3; border-color: #A5B4FC; }
+  .tier-pill.is-pro { background: #FEF3C7; color: #92400E; border-color: #F59E0B; }
+  .tier-pill.is-owner { background: #1B2A4A; color: #F5D98E; border-color: #C9A961; }
+  .admin-jump-btn {
+    font-size: 11.5px; font-weight: 800; padding: 5px 10px; border-radius: 999px;
+    background: #C9A961; color: #111D35; text-decoration: none;
+    border: 1px solid #A8873D; display: none; align-items: center; gap: 4px;
+  }
+  .admin-jump-btn.show { display: inline-flex; }
+  .is-locked-ctrl { position: relative; opacity: 0.52 !important; }
+  .is-locked-ctrl::after {
+    content: "🔒"; position: absolute; top: 3px; right: 4px; font-size: 9px; line-height: 1;
+  }
+  .chip-btn.is-locked-ctrl::after { position: static; margin-left: 4px; font-size: 10px; }
+  .btn-secondary.is-locked-ctrl::after { position: static; margin-left: 4px; font-size: 11px; }
+  .locked-overlay-wrap { position: relative; }
+  .locked-block { position: relative; opacity: 0.55; cursor: pointer; }
+  .locked-block input, .locked-block textarea, .locked-block select, .locked-block button { pointer-events: none; }
+  .toggle-line.locked-toggle { opacity: 0.58; cursor: pointer; }
+  .toggle-line.locked-toggle input { pointer-events: none; }
+
+  /* Unlock Modal */
+  .fh-modal-backdrop {
+    position: fixed; inset: 0; background: rgba(15, 23, 42, 0.58);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center;
+    padding: 16px; z-index: 1000;
+  }
+  .fh-modal-backdrop.open { display: flex; }
+  .fh-modal {
+    width: 100%; max-width: 420px; background: #FFFFFF;
+    border: 1.5px solid #D9CEB4; border-radius: 20px;
+    box-shadow: 0 24px 60px rgba(17, 29, 53, 0.34);
+    overflow: hidden; animation: fhPop .16s ease-out;
+  }
+  @keyframes fhPop { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
+  .fh-modal-head {
+    background: linear-gradient(135deg, #111D35, #1B2A4A);
+    color: #fff; padding: 18px 20px;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
+    border-bottom: 2px solid #C9A961;
+  }
+  .fh-modal-title { font-size: 19px; font-weight: 800; letter-spacing: -0.01em; }
+  .fh-modal-sub { font-size: 12px; color: #DECFA9; margin-top: 3px; line-height: 1.35; }
+  .fh-modal-close {
+    background: rgba(255,255,255,0.14); color: #fff; border: none;
+    width: 30px; height: 30px; border-radius: 999px; font-size: 15px; font-weight: 700;
+    cursor: pointer; flex-shrink: 0;
+  }
+  .fh-modal-body { padding: 18px 20px 20px; }
+  .fh-feature-note {
+    background: #FAF7F0; border: 1px solid #E5DAC0; border-radius: 11px;
+    padding: 10px 12px; font-size: 12.5px; color: #1B2A4A; font-weight: 600;
+    margin-bottom: 13px; display: none; line-height: 1.4;
+  }
+  .fh-feature-note.show { display: block; }
+  .fh-tier-summary {
+    font-size: 11.8px; color: #475569; background: #F8FAFC;
+    border: 1px solid #E2E8F0; border-radius: 11px; padding: 10px 12px;
+    line-height: 1.5; margin-bottom: 14px;
+  }
+  .fh-modal-err {
+    display: none; background: #FEF2F2; border: 1px solid #FECACA;
+    color: #B91C1C; border-radius: 10px; padding: 9px 11px;
+    font-size: 12.5px; font-weight: 600; margin-bottom: 11px;
+  }
+  .fh-modal-err.show { display: block; }
+  .fh-active-box {
+    display: none; background: #ECFDF5; border: 1px solid #A7F3D0;
+    color: #065F46; border-radius: 12px; padding: 11px 13px;
+    font-size: 12.5px; margin-bottom: 14px; line-height: 1.45;
+  }
+  .fh-active-box.show { display: block; }
+  .fh-code-input {
+    width: 100%; padding: 12px 14px; border: 1.5px solid #CBD5E1; border-radius: 11px;
+    font-size: 16px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: #111D35; background: #FCFBF8; outline: none; margin-bottom: 10px;
+  }
+  .fh-code-input:focus { border-color: #1B2A4A; background: #fff; }
+  .fh-modal-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .fh-btn-unlock {
+    flex: 1; background: linear-gradient(135deg, #D8B970, #B89346); color: #111D35;
+    border: none; border-radius: 11px; padding: 12px 16px; font-size: 14.5px; font-weight: 800;
+    cursor: pointer; font-family: inherit;
+  }
+  .fh-btn-unlock:disabled { opacity: 0.6; cursor: not-allowed; }
+  .fh-btn-muted {
+    background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1;
+    border-radius: 11px; padding: 10px 13px; font-size: 12.5px; font-weight: 700;
+    cursor: pointer; font-family: inherit;
+  }
+
+  /* Toast */
+  .fh-toast {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(18px);
+    background: #111D35; color: #fff; border: 1.5px solid #C9A961;
+    padding: 11px 18px; border-radius: 999px; font-size: 13px; font-weight: 700;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.28); opacity: 0; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease; z-index: 1200;
+    max-width: calc(100vw - 32px); text-align: center;
+  }
+  .fh-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
 </style>
 </head>
 <body>
@@ -291,12 +405,16 @@
           <div class="cp-sub">5 Luxury Designs • Auto-Zmanim &amp; Weekday Stays • Print From Phone</div>
         </div>
       </div>
-      <div id="statusPill" class="status-pill loading">Loading Zmanim…</div>
+      <div class="cp-right">
+        <button type="button" id="tierPill" class="tier-pill">🔒 Free • Enter Code</button>
+        <a id="adminJumpBtn" href="/admin" class="admin-jump-btn">⚙️ Admin</a>
+        <div id="statusPill" class="status-pill loading">Loading Zmanim…</div>
+      </div>
     </div>
 
     <div id="tierBanner" class="tier-banner" style="display:none">
       <span id="tierBannerText"></span>
-      <button type="button" class="mini-btn" id="btnBackToOwner">Back to Owner (Pro)</button>
+      <button type="button" class="mini-btn" id="btnOpenUnlockFromBanner">Enter Access Code</button>
     </div>
 
     <div class="bar-label">Stay Type</div>
@@ -389,8 +507,8 @@
       </div>
 
       <div class="tab-pane active" id="tabGeneral">
-        <div class="toggle-line"><span>Dry-Erase Blank Zmanim Boxes (2×2)</span><input type="checkbox" id="chkBlankZmanim" /></div>
-        <div class="toggle-line"><span>Blank Lock Code Box (Dry-Erase)</span><input type="checkbox" id="chkBlankCode" /></div>
+        <div class="toggle-line" id="wrapBlankZmanim"><span>Dry-Erase Blank Zmanim Boxes (2×2)</span><input type="checkbox" id="chkBlankZmanim" /></div>
+        <div class="toggle-line" id="wrapBlankCode"><span>Blank Lock Code Box (Dry-Erase)</span><input type="checkbox" id="chkBlankCode" /></div>
         <div class="adv-grid">
           <div class="field" id="wrapHeadline"><label for="inHeadline">Family / Main Headline</label><input id="inHeadline" type="text" /></div>
           <div class="field" id="wrapMonogram"><label for="inMonogram">Monogram Letter(s)</label><input id="inMonogram" type="text" maxlength="3" placeholder="G" /></div>
@@ -438,21 +556,7 @@
         </div>
       </div>
 
-      <div class="tab-pane" id="tabTiers">
-        <p style="font-size:12.5px;color:#475569;margin:0 0 9px 0;">
-          Preview how guests/hosts experience each FrumHost.com tier (yours stays on <strong>Owner / Full Pro</strong>):
-        </p>
-        <div class="bar-row">
-          <button type="button" class="chip-btn active" data-tier="pro">Owner / $18 Pro</button>
-          <button type="button" class="chip-btn" data-tier="basic">$9 Family</button>
-          <button type="button" class="chip-btn" data-tier="free">Free ($0)</button>
-        </div>
-        <div style="font-size:12px;color:#334155;background:#FAF7F0;border:1px solid #E5DAC0;border-radius:10px;padding:10px;line-height:1.45;">
-          • <strong>Free ($0):</strong> Own Family Name + Lock Code + Live Zmanim + English <em>or</em> Hebrew (not bilingual) + 1 Classic Design &amp; Color + subtle <em>FrumHost.com</em> footer.<br/>
-          • <strong>Family ($9/yr):</strong> + Custom Address/Entrance, all 5 Color Palettes, Bilingual (Eng + עברית), Weekday Stay Dates, 1-tap WhatsApp Copy &amp; No Watermark.<br/>
-          • <strong>Pro Host ($18/yr):</strong> + All 5 Luxury Art Designs (Candlesticks, Kiddush &amp; Challah, Guest Key, Jerusalem Arch, Monogram Crest), Full Box Editor (edit/add/delete/reorder), &amp; Blank Dry-Erase Master.
-        </div>
-      </div>
+
     </details>
     <p class="tip-note">iPhone tip: Tap Share → <strong>Add to Home Screen</strong>. Printing prints only the clean 1-page sign below.</p>
   </div>
@@ -531,6 +635,39 @@
     </div>
   </div>
 </div>
+
+
+<!-- UNLOCK FRUMHOST MODAL -->
+<div id="unlockModal" class="fh-modal-backdrop no-print" role="dialog" aria-modal="true" aria-labelledby="unlockModalTitle">
+  <div class="fh-modal">
+    <div class="fh-modal-head">
+      <div>
+        <div class="fh-modal-title" id="unlockModalTitle">✨ Unlock FrumHost</div>
+        <div class="fh-modal-sub">Enter an Access Code to unlock Family or Pro Host features</div>
+      </div>
+      <button type="button" class="fh-modal-close" id="btnCloseUnlock" aria-label="Close">✕</button>
+    </div>
+    <div class="fh-modal-body">
+      <div id="unlockFeatureNote" class="fh-feature-note"></div>
+      <div id="unlockActiveBox" class="fh-active-box"></div>
+      <div class="fh-tier-summary">
+        • <strong>Free ($0):</strong> 🕯️ Candlesticks &amp; 🗝️ Guest Key, Navy Gold, Eng or עברית, Live Zmanim &amp; PDF.<br/>
+        • <strong>Family:</strong> All 5 Color Palettes, Bilingual, Weekday Dates, Custom Address, WhatsApp Copy &amp; No Watermark.<br/>
+        • <strong>Pro Host:</strong> All 5 Luxury Art Designs, Full Box Editor &amp; Dry-Erase Blank Master.
+      </div>
+      <div id="unlockErr" class="fh-modal-err"></div>
+      <form id="unlockForm">
+        <input id="inAccessCode" class="fh-code-input" type="text" placeholder="ENTER ACCESS CODE" autocomplete="off" maxlength="32" />
+        <div class="fh-modal-actions">
+          <button type="submit" id="btnSubmitCode" class="fh-btn-unlock">✨ Unlock Now</button>
+          <button type="button" id="btnClearCode" class="fh-btn-muted" style="display:none">Switch to Free</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="fhToast" class="fh-toast no-print"></div>
 
 <script>
 const $ = (id) => document.getElementById(id);
@@ -634,10 +771,40 @@ function addDays(baseDate, n) {
   return d;
 }
 
+const ACCESS_CODE_KEY = "fh_access_code";
+const ACCESS_META_KEY = "fh_access_meta";
+const ADMIN_TOKEN_KEY = "fh_admin_token";
+const DEVICE_ID_KEY = "fh_device_id";
+
+function getDeviceId() {
+  try {
+    let id = localStorage.getItem(DEVICE_ID_KEY);
+    if (!id) {
+      id = (crypto && crypto.randomUUID) ? crypto.randomUUID() : ("dev-" + Math.random().toString(36).slice(2) + Date.now().toString(36));
+      localStorage.setItem(DEVICE_ID_KEY, id);
+    }
+    return id;
+  } catch (_) {
+    return "anon";
+  }
+}
+
+let accessInfo = { tier: "free", owner: false, code: "", label: "", expiresAt: null };
+let fhToastTimer = null;
+
+function showFhToast(msg) {
+  const el = $("fhToast");
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(fhToastTimer);
+  fhToastTimer = setTimeout(() => el.classList.remove("show"), 3200);
+}
+
 function loadState() {
   const now = new Date();
   const base = {
-    stayMode: "shabbos", design: "candles", theme: "navy", lang: "en", tier: "pro",
+    stayMode: "shabbos", design: "candles", theme: "navy", lang: "en", tier: "free",
     code: "C1234Z", zip: "08701", city: "Lakewood, NJ",
     checkIn: toYMD(addDays(now, 3)), checkOut: toYMD(addDays(now, 5)), guestLabel: "",
     blankZ: false, blankC: false, en: deepClone(DEFAULT_EN), he: deepClone(DEFAULT_HE)
@@ -646,8 +813,25 @@ function loadState() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return base;
     const saved = JSON.parse(raw);
-    return { ...base, ...saved, en: { ...deepClone(DEFAULT_EN), ...(saved.en || {}) }, he: { ...deepClone(DEFAULT_HE), ...(saved.he || {}) } };
+    const merged = { ...base, ...saved, tier: "free", en: { ...deepClone(DEFAULT_EN), ...(saved.en || {}) }, he: { ...deepClone(DEFAULT_HE), ...(saved.he || {}) } };
+    return merged;
   } catch (_) { return base; }
+}
+
+function enforceStateForTier() {
+  const t = state.tier;
+  if (t === "free") {
+    state.theme = "navy";
+    if (state.lang === "bi") state.lang = "en";
+    if (state.stayMode === "weekday") state.stayMode = "shabbos";
+    if (!["candles", "key"].includes(state.design)) state.design = state.stayMode === "shabbos" ? "candles" : "key";
+    state.blankZ = false;
+    state.blankC = false;
+  } else if (t === "family") {
+    if (!["candles", "key"].includes(state.design)) state.design = state.stayMode === "shabbos" ? "candles" : "key";
+    state.blankZ = false;
+    state.blankC = false;
+  }
 }
 
 function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (_) {} }
@@ -704,7 +888,7 @@ function renderCardEditors() {
   const locked = state.tier !== "pro";
   renderOneList("perksEditorList", c.perks, "perks", locked);
   renderOneList("favorsEditorList", c.favors, "favors", locked);
-  $("btnAddPerk").disabled = locked; $("btnAddFavor").disabled = locked;
+  $("btnAddPerk").classList.toggle("is-locked-ctrl", locked); $("btnAddFavor").classList.toggle("is-locked-ctrl", locked);
   $("btnAddPerk").style.opacity = locked ? "0.45" : "1"; $("btnAddFavor").style.opacity = locked ? "0.45" : "1";
 }
 
@@ -732,31 +916,241 @@ function renderOneList(containerId, list, key, locked) {
   });
 }
 
+function openUnlockModal(featureHint = "") {
+  const modal = $("unlockModal");
+  const note = $("unlockFeatureNote");
+  const err = $("unlockErr");
+  const actBox = $("unlockActiveBox");
+  const clearBtn = $("btnClearCode");
+  err.classList.remove("show");
+  if (featureHint) {
+    note.textContent = featureHint;
+    note.classList.add("show");
+  } else {
+    note.classList.remove("show");
+  }
+
+  if (accessInfo.owner) {
+    actBox.innerHTML = `<strong>👑 Owner Mode Active</strong> — Full Pro Host access unlocked via Admin login. <a href="/admin" style="color:#065F46;font-weight:800;margin-left:6px">Open Admin Panel →</a>`;
+    actBox.classList.add("show");
+    clearBtn.style.display = "none";
+  } else if (accessInfo.tier !== "free" && accessInfo.code) {
+    const tierName = accessInfo.tier === "pro" ? "👑 Pro Host" : "✨ Family";
+    const expTxt = accessInfo.expiresAt ? (" • Expires " + new Date(accessInfo.expiresAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })) : "";
+    actBox.innerHTML = `<strong>${tierName} Unlocked</strong> with code <code>${esc(accessInfo.code)}</code>${accessInfo.label ? " (" + esc(accessInfo.label) + ")" : ""}${expTxt}.`;
+    actBox.classList.add("show");
+    clearBtn.style.display = "inline-block";
+  } else {
+    actBox.classList.remove("show");
+    clearBtn.style.display = "none";
+  }
+
+  $("inAccessCode").value = "";
+  modal.classList.add("open");
+  setTimeout(() => { try { $("inAccessCode").focus(); } catch (_) {} }, 50);
+}
+
+function closeUnlockModal() {
+  $("unlockModal").classList.remove("open");
+}
+
+function updateTierPill() {
+  const pill = $("tierPill");
+  const adminBtn = $("adminJumpBtn");
+  pill.classList.remove("is-family", "is-pro", "is-owner");
+  if (accessInfo.owner) {
+    pill.textContent = "👑 Owner Mode";
+    pill.classList.add("is-owner");
+    adminBtn.classList.add("show");
+  } else if (state.tier === "pro") {
+    pill.textContent = "👑 Pro Unlocked";
+    pill.classList.add("is-pro");
+    adminBtn.classList.remove("show");
+  } else if (state.tier === "family") {
+    pill.textContent = "✨ Family Unlocked";
+    pill.classList.add("is-family");
+    adminBtn.classList.remove("show");
+  } else {
+    pill.textContent = "🔒 Free • Enter Code";
+    adminBtn.classList.remove("show");
+  }
+}
+
 function applyTierLocks() {
   const t = state.tier;
   const banner = $("tierBanner");
-  if (t === "pro") banner.style.display = "none";
-  else if (t === "basic") { banner.style.display = "flex"; $("tierBannerText").innerHTML = "Previewing <strong>$9 Family Tier</strong>: Name, Address, 5 Colors, Bilingual &amp; Weekday Dates unlocked; Extra Art Designs &amp; Box Editor locked to $18 Pro."; }
-  else { banner.style.display = "flex"; $("tierBannerText").innerHTML = "Previewing <strong>Free Tier ($0)</strong>: Family Name + Lock Code + Zmanim + English or Hebrew unlocked; Address/Colors/Designs/Box Editor locked + FrumHost.com footer shown."; }
+  if (t === "pro") {
+    banner.style.display = "none";
+  } else if (t === "family") {
+    banner.style.display = "none";
+  } else {
+    banner.style.display = "none";
+  }
+
+  updateTierPill();
 
   const proLocked = t !== "pro";
-  const basicLocked = t === "free";
+  const familyLocked = t === "free";
 
+  // 2 Free Luxury Designs: candles + key always free; kiddush, jerusalem, monogram require Pro
   document.querySelectorAll("#designStrip .style-btn").forEach(btn => {
-    const allowedDefault = (btn.dataset.design === "candles" || (state.stayMode !== "shabbos" && btn.dataset.design === "key"));
-    btn.style.opacity = (!allowedDefault && proLocked) ? "0.45" : "1";
+    const isFreeDesign = (btn.dataset.design === "candles" || btn.dataset.design === "key");
+    const locked = !isFreeDesign && proLocked;
+    btn.classList.toggle("is-locked-ctrl", locked);
+    btn.style.opacity = "";
   });
-  document.querySelectorAll("#themeStrip .theme-btn").forEach(btn => { btn.style.opacity = (btn.dataset.theme !== "navy" && basicLocked) ? "0.45" : "1"; });
-  document.querySelectorAll("#langBar .chip-btn").forEach(btn => { btn.style.opacity = (btn.dataset.lang === "bi" && basicLocked) ? "0.45" : "1"; });
-  document.querySelectorAll("#stayModeBar .chip-btn").forEach(btn => { btn.style.opacity = (btn.dataset.mode === "weekday" && basicLocked) ? "0.45" : "1"; });
+  document.querySelectorAll("#themeStrip .theme-btn").forEach(btn => {
+    const locked = btn.dataset.theme !== "navy" && familyLocked;
+    btn.classList.toggle("is-locked-ctrl", locked);
+    btn.style.opacity = "";
+  });
+  document.querySelectorAll("#langBar .chip-btn").forEach(btn => {
+    const locked = btn.dataset.lang === "bi" && familyLocked;
+    btn.classList.toggle("is-locked-ctrl", locked);
+    btn.style.opacity = "";
+  });
+  document.querySelectorAll("#stayModeBar .chip-btn").forEach(btn => {
+    const locked = btn.dataset.mode === "weekday" && familyLocked;
+    btn.classList.toggle("is-locked-ctrl", locked);
+    btn.style.opacity = "";
+  });
 
+  $("btnCopyWa").classList.toggle("is-locked-ctrl", familyLocked);
   $("wrapHeadline").classList.toggle("locked-block", false);
-  $("wrapAddr").classList.toggle("locked-block", basicLocked);
+  $("wrapAddr").classList.toggle("locked-block", familyLocked);
   ["wrapMonogram","wrapHeGreet","wrapWelcome","wrapLockDoors","wrapLockSub","wrapStayInNote","wrapStayOutNote","wrapStayJoke","wrapSec1","wrapSec2","wrapFooter"]
     .forEach(id => $(id).classList.toggle("locked-block", proLocked));
   $("chkBlankZmanim").disabled = proLocked;
   $("chkBlankCode").disabled = proLocked;
-  $("outWatermark").style.display = "block";
+  $("wrapBlankZmanim").classList.toggle("locked-toggle", proLocked);
+  $("wrapBlankCode").classList.toggle("locked-toggle", proLocked);
+
+  // Subtle Made with FrumHost.com footer ONLY on Free tier
+  $("outWatermark").style.display = (t === "free") ? "block" : "none";
+}
+
+function applyVerifiedAccess(info, { silent = false, toastMsg = "" } = {}) {
+  accessInfo = {
+    tier: info.tier === "pro" ? "pro" : (info.tier === "family" ? "family" : "free"),
+    owner: !!info.owner,
+    code: info.code || "",
+    label: info.label || "",
+    expiresAt: info.expiresAt || null
+  };
+  state.tier = accessInfo.tier;
+  enforceStateForTier();
+  syncActiveButtons();
+  populateGeneralInputs();
+  renderCardEditors();
+  renderSign();
+  if (!silent && toastMsg) showFhToast(toastMsg);
+}
+
+async function redeemCode(rawCode, { fromUrl = false } = {}) {
+  const clean = String(rawCode || "").trim().toUpperCase();
+  if (!clean) return { ok: false, error: "Please enter an access code." };
+  try {
+    const res = await fetch("/api/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: clean, redeem: true, deviceId: getDeviceId() }),
+      cache: "no-store"
+    });
+    const data = await res.json();
+    if (data.ok) {
+      try {
+        localStorage.setItem(ACCESS_CODE_KEY, data.code);
+        localStorage.setItem(ACCESS_META_KEY, JSON.stringify({ tier: data.tier, label: data.label || "", expiresAt: data.expiresAt || null }));
+      } catch (_) {}
+      const label = data.tier === "pro" ? "👑 Pro Host unlocked!" : "✨ Family tier unlocked!";
+      applyVerifiedAccess({ tier: data.tier, owner: false, code: data.code, label: data.label, expiresAt: data.expiresAt }, { toastMsg: label });
+      return { ok: true, data };
+    }
+    if (fromUrl) showFhToast("⚠️ " + (data.error || "Access code is invalid or expired."));
+    return { ok: false, error: data.error || "Access code is not valid." };
+  } catch (_) {
+    const err = "Could not verify code right now — please try again.";
+    if (fromUrl) showFhToast("⚠️ " + err);
+    return { ok: false, error: err };
+  }
+}
+
+async function verifySessionOnLoad() {
+  const params = new URLSearchParams(window.location.search);
+  const urlCode = params.get("code");
+  const urlOwnerToken = params.get("ownerToken");
+
+  if (urlOwnerToken) {
+    try { localStorage.setItem(ADMIN_TOKEN_KEY, urlOwnerToken); } catch (_) {}
+    params.delete("ownerToken");
+    const cleanUrl = window.location.pathname + (params.toString() ? "?" + params.toString() : "") + window.location.hash;
+    history.replaceState(null, "", cleanUrl);
+  }
+
+  // 1. Check URL ?code=XYZ auto-unlock first
+  if (urlCode) {
+    params.delete("code");
+    const cleanUrl = window.location.pathname + (params.toString() ? "?" + params.toString() : "") + window.location.hash;
+    history.replaceState(null, "", cleanUrl);
+    const r = await redeemCode(urlCode, { fromUrl: true });
+    if (r.ok) return;
+  }
+
+  // 2. Check Owner Mode admin token
+  let ownerTok = "";
+  try { ownerTok = localStorage.getItem(ADMIN_TOKEN_KEY) || ""; } catch (_) {}
+  if (ownerTok) {
+    try {
+      const res = await fetch("/api/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ownerToken: ownerTok }),
+        cache: "no-store"
+      });
+      const data = await res.json();
+      if (data.ok && data.owner) {
+        applyVerifiedAccess({ tier: "pro", owner: true, code: "", label: "Owner Mode", expiresAt: data.expiresAt }, { silent: true });
+        return;
+      } else {
+        try { localStorage.removeItem(ADMIN_TOKEN_KEY); } catch (_) {}
+      }
+    } catch (_) {}
+  }
+
+  // 3. Silently re-verify stored access code (live revocation enforcement, checkOnly=1)
+  let storedCode = "";
+  try { storedCode = localStorage.getItem(ACCESS_CODE_KEY) || ""; } catch (_) {}
+  if (storedCode) {
+    // Optimistically show cached tier while verifying to avoid flash, then immediately enforce server answer
+    try {
+      const cached = JSON.parse(localStorage.getItem(ACCESS_META_KEY) || "null");
+      if (cached && (cached.tier === "family" || cached.tier === "pro")) {
+        applyVerifiedAccess({ tier: cached.tier, owner: false, code: storedCode, label: cached.label || "", expiresAt: cached.expiresAt || null }, { silent: true });
+      }
+    } catch (_) {}
+
+    try {
+      const res = await fetch(`/api/verify?checkOnly=1&code=${encodeURIComponent(storedCode)}&deviceId=${encodeURIComponent(getDeviceId())}`, { cache: "no-store" });
+      const data = await res.json();
+      if (data.ok) {
+        try {
+          localStorage.setItem(ACCESS_META_KEY, JSON.stringify({ tier: data.tier, label: data.label || "", expiresAt: data.expiresAt || null }));
+        } catch (_) {}
+        applyVerifiedAccess({ tier: data.tier, owner: false, code: data.code, label: data.label, expiresAt: data.expiresAt }, { silent: true });
+      } else {
+        // Revoked, expired, or deleted server-side — immediately downgrade cleanly to Free
+        try {
+          localStorage.removeItem(ACCESS_CODE_KEY);
+          localStorage.removeItem(ACCESS_META_KEY);
+        } catch (_) {}
+        applyVerifiedAccess({ tier: "free", owner: false, code: "", label: "", expiresAt: null }, { toastMsg: "Access code is no longer active — switched to Free tier." });
+      }
+    } catch (_) {
+      // Network hiccup: keep cached state silently
+    }
+  } else {
+    applyVerifiedAccess({ tier: "free", owner: false, code: "", label: "", expiresAt: null }, { silent: true });
+  }
 }
 
 function renderSign() {
@@ -966,9 +1360,73 @@ function setActiveWeekChip(id) { ["btnThisWeek", "btnNextWeek", "btnPlus2"].forE
   const fri = toYMD(getUpcomingFriday(0)); $("inFriday").value = fri;
   renderSign(); fetchWeeklyZmanim(fri);
 
+  $("tierPill").addEventListener("click", () => openUnlockModal());
+  $("btnOpenUnlockFromBanner").addEventListener("click", () => openUnlockModal());
+  $("btnCloseUnlock").addEventListener("click", closeUnlockModal);
+  $("unlockModal").addEventListener("click", e => { if (e.target === $("unlockModal")) closeUnlockModal(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeUnlockModal(); });
+
+  $("unlockForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    $("unlockErr").classList.remove("show");
+    const raw = $("inAccessCode").value.trim();
+    if (!raw) {
+      $("unlockErr").textContent = "Please enter an access code.";
+      $("unlockErr").classList.add("show");
+      return;
+    }
+    $("btnSubmitCode").disabled = true;
+    $("btnSubmitCode").textContent = "Checking…";
+    const r = await redeemCode(raw, { fromUrl: false });
+    $("btnSubmitCode").disabled = false;
+    $("btnSubmitCode").textContent = "✨ Unlock Now";
+    if (r.ok) {
+      closeUnlockModal();
+    } else {
+      $("unlockErr").textContent = r.error || "Invalid access code.";
+      $("unlockErr").classList.add("show");
+    }
+  });
+
+  $("btnClearCode").addEventListener("click", () => {
+    try {
+      localStorage.removeItem(ACCESS_CODE_KEY);
+      localStorage.removeItem(ACCESS_META_KEY);
+    } catch (_) {}
+    applyVerifiedAccess({ tier: "free", owner: false, code: "", label: "", expiresAt: null }, { toastMsg: "Switched back to Free tier" });
+    closeUnlockModal();
+  });
+
+  // Tapping any locked field or dry-erase toggle opens the Unlock modal
+  $("tabGeneral").addEventListener("click", e => {
+    const lockedField = e.target.closest(".locked-block");
+    if (lockedField) {
+      e.preventDefault();
+      const isAddr = lockedField.id === "wrapAddr";
+      openUnlockModal(isAddr ? "📍 Custom Address & Entrance is unlocked in Family or Pro Host." : "✏️ Customizing all sign text & headers is unlocked in Pro Host.");
+      return;
+    }
+    const lockedTog = e.target.closest(".locked-toggle");
+    if (lockedTog) {
+      e.preventDefault();
+      openUnlockModal("🖍️ Dry-Erase Blank Master toggles are unlocked in Pro Host.");
+    }
+  });
+  ["tabPerks", "tabFavors"].forEach(tabId => {
+    $(tabId).addEventListener("click", e => {
+      if (state.tier !== "pro" && (e.target.closest(".locked-block") || e.target.closest(".add-card-btn"))) {
+        e.preventDefault();
+        openUnlockModal("📦 Full Box Editor (edit, add, reorder & delete boxes) is unlocked in Pro Host.");
+      }
+    });
+  });
+
   document.querySelectorAll("#stayModeBar .chip-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      if (state.tier === "free" && btn.dataset.mode === "weekday") { alert("Weekday Stay Dates mode is unlocked in the $9 Family tier!"); return; }
+      if (state.tier === "free" && btn.dataset.mode === "weekday") {
+        openUnlockModal("🗓️ Weekday Stay Dates (Check-In / Check-Out) is unlocked in Family or Pro Host.");
+        return;
+      }
       const prev = state.stayMode; state.stayMode = btn.dataset.mode;
       if (state.stayMode !== "shabbos" && (state.design === "candles" || state.design === "kiddush")) state.design = "key";
       else if (state.stayMode === "shabbos" && prev !== "shabbos" && state.design === "key") state.design = "candles";
@@ -978,42 +1436,37 @@ function setActiveWeekChip(id) { ["btnThisWeek", "btnNextWeek", "btnPlus2"].forE
 
   document.querySelectorAll("#designStrip .style-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const allowedDefault = (btn.dataset.design === "candles" || (state.stayMode !== "shabbos" && btn.dataset.design === "key"));
-      if (state.tier !== "pro" && !allowedDefault) { alert("All 5 Luxury Art Designs are unlocked in the $18 Pro Host tier!"); return; }
+      const isFreeDesign = (btn.dataset.design === "candles" || btn.dataset.design === "key");
+      if (state.tier !== "pro" && !isFreeDesign) {
+        openUnlockModal("🎨 Kiddush, Jerusalem Arch & Monogram Crest are unlocked in Pro Host.");
+        return;
+      }
       state.design = btn.dataset.design; syncActiveButtons(); renderSign();
     });
   });
 
   document.querySelectorAll("#themeStrip .theme-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      if (state.tier === "free" && btn.dataset.theme !== "navy") { alert("Luxury Color Palettes are unlocked in the $9 Family tier!"); return; }
+      if (state.tier === "free" && btn.dataset.theme !== "navy") {
+        openUnlockModal("🎨 All 5 Luxury Color Palettes are unlocked in Family or Pro Host.");
+        return;
+      }
       state.theme = btn.dataset.theme; syncActiveButtons(); renderSign();
     });
   });
 
   document.querySelectorAll("#langBar .chip-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      if (state.tier === "free" && btn.dataset.lang === "bi") { alert("Bilingual (Eng + עברית) is unlocked in the $9 Family tier!"); return; }
+      if (state.tier === "free" && btn.dataset.lang === "bi") {
+        openUnlockModal("🌐 Bilingual (Eng + עברית) mode is unlocked in Family or Pro Host.");
+        return;
+      }
       state.lang = btn.dataset.lang; syncActiveButtons(); populateGeneralInputs(); renderCardEditors(); renderSign();
     });
   });
 
-  document.querySelectorAll("#tabTiers [data-tier]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      state.tier = btn.dataset.tier;
-      if (state.tier === "free") {
-        state.theme = "navy"; if (state.lang === "bi") state.lang = "en";
-        if (state.stayMode === "weekday") state.stayMode = "shabbos";
-        state.design = state.stayMode === "shabbos" ? "candles" : "key";
-        state.blankZ = false; state.blankC = false;
-      } else if (state.tier === "basic") {
-        if (!["candles","key"].includes(state.design)) state.design = state.stayMode === "shabbos" ? "candles" : "key";
-        state.blankZ = false; state.blankC = false;
-      }
-      syncActiveButtons(); populateGeneralInputs(); renderCardEditors(); renderSign();
-    });
-  });
-  $("btnBackToOwner").addEventListener("click", () => { state.tier = "pro"; syncActiveButtons(); renderCardEditors(); renderSign(); });
+  // Run server-side verification / ?code= redemption immediately on boot
+  verifySessionOnLoad();
 
   $("btnThisWeek").addEventListener("click", () => { setActiveWeekChip("btnThisWeek"); const f = toYMD(getUpcomingFriday(0)); $("inFriday").value = f; fetchWeeklyZmanim(f); });
   $("btnNextWeek").addEventListener("click", () => { setActiveWeekChip("btnNextWeek"); const f = toYMD(getUpcomingFriday(1)); $("inFriday").value = f; fetchWeeklyZmanim(f); });
@@ -1068,13 +1521,13 @@ function setActiveWeekChip(id) { ["btnThisWeek", "btnNextWeek", "btnPlus2"].forE
     });
   });
 
-  $("btnAddPerk").addEventListener("click", () => { activeCopy().perks.push({ icon: "info", title: state.lang === "he" ? "כותרת חדשה" : "New Guest Note", body: state.lang === "he" ? "כתבו כאן פרטים לאורחים..." : "Add your custom details here..." }); renderCardEditors(); renderSign(); });
-  $("btnAddFavor").addEventListener("click", () => { activeCopy().favors.push({ icon: "wifi", title: state.lang === "he" ? "ווייפיי ופרטים" : "Wi-Fi & House Info", body: state.lang === "he" ? "כתבו כאן פרטים נוספים..." : "Add your custom note or Wi-Fi info here..." }); renderCardEditors(); renderSign(); });
+  $("btnAddPerk").addEventListener("click", () => { if (state.tier !== "pro") { openUnlockModal("📦 Full Box Editor is unlocked in Pro Host."); return; } activeCopy().perks.push({ icon: "info", title: state.lang === "he" ? "כותרת חדשה" : "New Guest Note", body: state.lang === "he" ? "כתבו כאן פרטים לאורחים..." : "Add your custom details here..." }); renderCardEditors(); renderSign(); });
+  $("btnAddFavor").addEventListener("click", () => { if (state.tier !== "pro") { openUnlockModal("📦 Full Box Editor is unlocked in Pro Host."); return; } activeCopy().favors.push({ icon: "wifi", title: state.lang === "he" ? "ווייפיי ופרטים" : "Wi-Fi & House Info", body: state.lang === "he" ? "כתבו כאן פרטים נוספים..." : "Add your custom note or Wi-Fi info here..." }); renderCardEditors(); renderSign(); });
   $("btnRefetch").addEventListener("click", () => fetchWeeklyZmanim($("inFriday").value));
-  $("btnResetAll").addEventListener("click", () => { if (!confirm("Reset all customized text and boxes back to defaults?")) return; localStorage.removeItem(STORAGE_KEY); state = loadState(); syncActiveButtons(); populateGeneralInputs(); renderCardEditors(); renderSign(); });
+  $("btnResetAll").addEventListener("click", () => { if (!confirm("Reset all customized text and boxes back to defaults?")) return; localStorage.removeItem(STORAGE_KEY); state = loadState(); state.tier = accessInfo.tier; enforceStateForTier(); syncActiveButtons(); populateGeneralInputs(); renderCardEditors(); renderSign(); });
   $("btnPrint").addEventListener("click", () => window.print());
   $("btnCopyWa").addEventListener("click", async () => {
-    if (state.tier === "free") { alert("1-tap WhatsApp Copy is unlocked in the $9 Family tier!"); return; }
+    if (state.tier === "free") { openUnlockModal("💬 1-tap WhatsApp Copy is unlocked in Family or Pro Host."); return; }
     const txt = buildWhatsAppText(), btn = $("btnCopyWa");
     try { await navigator.clipboard.writeText(txt); } catch (_) { const ta = document.createElement("textarea"); ta.value = txt; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); }
     btn.textContent = "✅ Copied!"; setTimeout(() => { btn.textContent = "💬 Copy WhatsApp"; }, 2200);

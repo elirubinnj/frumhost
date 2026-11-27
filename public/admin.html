@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>FrumHost Admin — Access Code Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #1B2A4A;
+    --navy-dark: #111D35;
+    --navy-light: #263B66;
+    --gold: #C9A961;
+    --gold-dark: #9B7B35;
+    --gold-soft: #F7F1E1;
+    --cream: #FAF7F0;
+    --card: #FFFFFF;
+    --border: #E5DDC8;
+    --muted: #64748B;
+    --ink: #1E293B;
+    --green: #15803D;
+    --green-bg: #ECFDF5;
+    --red: #B91C1C;
+    --red-bg: #FEF2F2;
+    --amber: #B45309;
+    --amber-bg: #FFFBEB;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #EFECE5;
+    color: var(--ink);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .shell {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 16px 14px 48px;
+  }
+
+  /* Header */
+  .topbar {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+    color: #fff;
+    border-radius: 18px;
+    padding: 16px 18px;
+    border: 1px solid rgba(201,169,97,0.35);
+    box-shadow: 0 10px 30px rgba(17,29,53,0.18);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 11px; }
+  .brand-ico {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: rgba(201,169,97,0.18); border: 1px solid rgba(201,169,97,0.5);
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+  }
+  .brand-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 23px; font-weight: 700; letter-spacing: 0.2px; line-height: 1.05;
+  }
+  .brand-sub { font-size: 11.5px; color: #D4C5A0; margin-top: 2px; font-weight: 500; }
+  .top-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+  .btn {
+    border: none; cursor: pointer; font-family: inherit; font-weight: 700;
+    border-radius: 11px; padding: 9px 13px; font-size: 12.5px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    transition: transform .08s ease, opacity .15s ease, background .15s ease;
+    text-decoration: none;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn-gold {
+    background: linear-gradient(135deg, #D8B970, #B89346);
+    color: #111D35;
+    box-shadow: 0 3px 10px rgba(201,169,97,0.32);
+  }
+  .btn-navy { background: var(--navy); color: #fff; }
+  .btn-ghost-light {
+    background: rgba(255,255,255,0.12); color: #fff;
+    border: 1px solid rgba(255,255,255,0.22);
+  }
+  .btn-outline {
+    background: #fff; color: var(--navy); border: 1px solid var(--border);
+  }
+  .btn-danger-soft {
+    background: var(--red-bg); color: var(--red); border: 1px solid #FECACA;
+  }
+  .btn-green-soft {
+    background: var(--green-bg); color: var(--green); border: 1px solid #BBF7D0;
+  }
+  .btn-amber-soft {
+    background: var(--amber-bg); color: var(--amber); border: 1px solid #FDE68A;
+  }
+  .btn-sm { padding: 7px 11px; font-size: 12px; border-radius: 9px; }
+  .btn-lg { width: 100%; padding: 13px 16px; font-size: 14.5px; border-radius: 13px; }
+
+  /* Cards */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 6px 20px rgba(27,42,74,0.06);
+    margin-bottom: 16px;
+  }
+  .card-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; margin-bottom: 14px;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px; font-weight: 700; color: var(--navy);
+  }
+  .card-sub { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+
+  /* Login Card */
+  .login-wrap { max-width: 420px; margin: 36px auto 0; }
+  .login-hero { text-align: center; margin-bottom: 18px; }
+  .login-hero .icon {
+    width: 56px; height: 56px; border-radius: 16px; margin: 0 auto 10px;
+    background: var(--navy); color: var(--gold);
+    display: flex; align-items: center; justify-content: center; font-size: 26px;
+    border: 2px solid var(--gold);
+  }
+
+  /* Stats */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;
+  }
+  .stat-box {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 12px 14px; text-align: center;
+  }
+  .stat-num { font-size: 22px; font-weight: 800; color: var(--navy); line-height: 1.1; }
+  .stat-lbl { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.4px; }
+
+  /* Form controls */
+  .field { margin-bottom: 13px; }
+  .field label {
+    display: block; font-size: 11.5px; font-weight: 700;
+    color: var(--navy); text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .field input[type="text"],
+  .field input[type="password"],
+  .field input[type="number"],
+  .field input[type="datetime-local"] {
+    width: 100%; border: 1.5px solid #D9D2C0; border-radius: 11px;
+    padding: 11px 13px; font-size: 15px; font-family: inherit; color: var(--ink);
+    background: #FCFBF8; outline: none;
+  }
+  .field input:focus { border-color: var(--navy); background: #fff; }
+  .code-font {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    letter-spacing: 1px; font-weight: 700; text-transform: uppercase;
+  }
+
+  /* Pill selectors */
+  .pill-row { display: flex; flex-wrap: wrap; gap: 7px; }
+  .pill {
+    border: 1.5px solid #D9D2C0; background: #FAF8F3; color: var(--navy);
+    border-radius: 10px; padding: 8px 12px; font-size: 12.5px; font-weight: 700;
+    cursor: pointer; font-family: inherit; transition: all .12s ease;
+  }
+  .pill.active {
+    background: var(--navy); color: #fff; border-color: var(--navy);
+    box-shadow: 0 2px 8px rgba(27,42,74,0.22);
+  }
+  .tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  .tier-opt {
+    border: 1.5px solid #D9D2C0; background: #FAF8F3; border-radius: 13px;
+    padding: 11px 12px; cursor: pointer; text-align: left; font-family: inherit;
+    transition: all .12s ease;
+  }
+  .tier-opt .t-name { font-weight: 800; font-size: 14px; color: var(--navy); }
+  .tier-opt .t-desc { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  .tier-opt.active {
+    background: var(--navy); border-color: var(--gold);
+    box-shadow: 0 4px 12px rgba(27,42,74,0.2);
+  }
+  .tier-opt.active .t-name { color: #fff; }
+  .tier-opt.active .t-desc { color: #D4C5A0; }
+
+  .sub-input { margin-top: 8px; display: none; }
+  .sub-input.show { display: block; }
+
+  /* Newly created highlight banner */
+  .created-banner {
+    display: none; margin-top: 14px; padding: 13px 14px; border-radius: 13px;
+    background: var(--green-bg); border: 1.5px solid #86EFAC; color: #14532D;
+  }
+  .created-banner.show { display: block; }
+  .created-row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; flex-wrap: wrap; margin-top: 8px;
+  }
+  .created-url {
+    font-size: 12px; font-family: ui-monospace, monospace;
+    word-break: break-all; background: rgba(255,255,255,0.85);
+    padding: 6px 9px; border-radius: 8px; border: 1px solid #BBF7D0; flex: 1;
+  }
+
+  /* Filter tabs */
+  .filter-bar { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+
+  /* Code items */
+  .code-list { display: flex; flex-direction: column; gap: 11px; }
+  .code-item {
+    border: 1.5px solid var(--border); border-radius: 15px; padding: 14px;
+    background: #FCFBF8;
+  }
+  .code-item.is-inactive { opacity: 0.72; background: #F6F5F1; }
+  .ci-top {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+  }
+  .ci-code-wrap { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .ci-code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 16.5px; font-weight: 800; color: var(--navy); letter-spacing: 0.6px;
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 800;
+    letter-spacing: 0.3px; text-transform: uppercase;
+  }
+  .b-pro { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; }
+  .b-family { background: #E0E7FF; color: #3730A3; border: 1px solid #C7D2FE; }
+  .b-active { background: var(--green-bg); color: var(--green); border: 1px solid #BBF7D0; }
+  .b-revoked { background: var(--red-bg); color: var(--red); border: 1px solid #FECACA; }
+  .b-expired { background: var(--amber-bg); color: var(--amber); border: 1px solid #FDE68A; }
+  .b-exhausted { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; }
+
+  .ci-label { font-size: 13px; color: #334155; font-weight: 600; margin-top: 5px; }
+  .ci-meta {
+    display: flex; flex-wrap: wrap; gap: 10px 14px;
+    font-size: 12px; color: var(--muted); margin-top: 8px; font-weight: 500;
+  }
+  .ci-actions {
+    display: flex; flex-wrap: wrap; gap: 7px; margin-top: 11px;
+    padding-top: 10px; border-top: 1px dashed #E5DDC8;
+  }
+  .empty-state {
+    text-align: center; padding: 28px 16px; color: var(--muted); font-size: 13.5px;
+  }
+  .err-msg {
+    color: var(--red); background: var(--red-bg); border: 1px solid #FECACA;
+    border-radius: 10px; padding: 9px 12px; font-size: 12.5px; font-weight: 600;
+    margin-bottom: 12px; display: none;
+  }
+  .err-msg.show { display: block; }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--navy-dark); color: #fff; border: 1px solid var(--gold);
+    padding: 11px 18px; border-radius: 999px; font-size: 13px; font-weight: 700;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.28); opacity: 0; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease; z-index: 999; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (max-width: 520px) {
+    .topbar { padding: 14px; }
+    .top-actions { width: 100%; }
+    .top-actions .btn { flex: 1; }
+    .stats-grid { gap: 7px; }
+    .stat-box { padding: 10px 6px; }
+    .stat-num { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <!-- LOGIN VIEW -->
+  <div id="loginView" class="login-wrap" style="display:none">
+    <div class="card">
+      <div class="login-hero">
+        <div class="icon">👑</div>
+        <div class="card-title" style="font-size:26px">FrumHost Admin</div>
+        <div class="card-sub">Access Code Manager &amp; Owner Mode</div>
+      </div>
+      <div id="loginErr" class="err-msg"></div>
+      <form id="loginForm">
+        <div class="field">
+          <label for="inPin">Admin PIN</label>
+          <input id="inPin" type="password" class="code-font" placeholder="Enter your Admin PIN" autocomplete="current-password" required />
+        </div>
+        <button type="submit" id="btnLogin" class="btn btn-navy btn-lg">🔐 Sign In</button>
+      </form>
+      <div style="text-align:center;margin-top:14px">
+        <a href="/" style="font-size:12.5px;color:var(--muted);text-decoration:none;font-weight:600">← Back to FrumHost Studio</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD VIEW -->
+  <div id="dashView" style="display:none">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-ico">🕯️</div>
+        <div>
+          <div class="brand-title">FrumHost Admin</div>
+          <div class="brand-sub">Live Access Code Manager • $0/mo</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <a href="/" class="btn btn-gold">✨ Open Studio (Owner Mode)</a>
+        <button type="button" id="btnSignOut" class="btn btn-ghost-light">Sign Out</button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box"><div class="stat-num" id="statActive">0</div><div class="stat-lbl">Active Codes</div></div>
+      <div class="stat-box"><div class="stat-num" id="statUses">0</div><div class="stat-lbl">Total Uses</div></div>
+      <div class="stat-box"><div class="stat-num" id="statTotal">0</div><div class="stat-lbl">All Codes</div></div>
+    </div>
+
+    <!-- CREATE CODE CARD -->
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Generate New Access Code</div>
+          <div class="card-sub">Create instant auto-unlock links with tier, expiry &amp; usage limits</div>
+        </div>
+      </div>
+      <div id="createErr" class="err-msg"></div>
+
+      <form id="createForm">
+        <div class="field">
+          <label for="inCustomCode">Code Word (Optional — leave blank to auto-generate)</label>
+          <input id="inCustomCode" type="text" class="code-font" placeholder="e.g. SHABBOS5787 or blank for FH-XXXX" maxlength="32" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label>Tier Unlocked</label>
+          <div class="tier-grid" id="tierSelector">
+            <button type="button" class="tier-opt active" data-tier="pro">
+              <div class="t-name">👑 Pro Host ($18)</div>
+              <div class="t-desc">All 5 designs, Box Editor, Dry-Erase, no watermark</div>
+            </button>
+            <button type="button" class="tier-opt" data-tier="family">
+              <div class="t-name">✨ Family ($9)</div>
+              <div class="t-desc">5 colors, Bilingual, Weekday Dates, WhatsApp, no watermark</div>
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Timing / Expiration</label>
+          <div class="pill-row" id="expiryPresets">
+            <button type="button" class="pill active" data-exp="never">Never</button>
+            <button type="button" class="pill" data-exp="24">24 Hours</button>
+            <button type="button" class="pill" data-exp="168">7 Days</button>
+            <button type="button" class="pill" data-exp="720">30 Days</button>
+            <button type="button" class="pill" data-exp="8760">1 Year</button>
+            <button type="button" class="pill" data-exp="custom">Custom Date</button>
+          </div>
+          <div class="sub-input" id="customExpWrap">
+            <input id="inCustomExp" type="datetime-local" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Max Uses</label>
+          <div class="pill-row" id="usesPresets">
+            <button type="button" class="pill active" data-uses="unlimited">Unlimited</button>
+            <button type="button" class="pill" data-uses="1">1 Use</button>
+            <button type="button" class="pill" data-uses="5">5 Uses</button>
+            <button type="button" class="pill" data-uses="25">25 Uses</button>
+            <button type="button" class="pill" data-uses="custom">Custom</button>
+          </div>
+          <div class="sub-input" id="customUsesWrap">
+            <input id="inCustomUses" type="number" min="1" max="100000" placeholder="Enter max number of uses (e.g. 10)" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="inLabel">Label / Note (Internal)</label>
+          <input id="inLabel" type="text" placeholder="e.g. Lakewood Launch Promo, Chaim's Family" maxlength="120" />
+        </div>
+
+        <button type="submit" id="btnGenerate" class="btn btn-gold btn-lg">⚡ Generate Code</button>
+      </form>
+
+      <div id="createdBanner" class="created-banner">
+        <div style="font-weight:800;font-size:13.5px">✅ Code created &amp; live immediately!</div>
+        <div class="created-row">
+          <div id="createdUrlText" class="created-url"></div>
+          <button type="button" id="btnCopyCreated" class="btn btn-navy btn-sm">📋 Copy Share Link</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE CODES LIST -->
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Live Access Codes</div>
+          <div class="card-sub">Revoked codes immediately downgrade users on next load</div>
+        </div>
+        <button type="button" id="btnRefresh" class="btn btn-outline btn-sm">↻ Refresh</button>
+      </div>
+
+      <div class="filter-bar" id="filterBar">
+        <button type="button" class="pill active" data-filter="all">All</button>
+        <button type="button" class="pill" data-filter="active">Active</button>
+        <button type="button" class="pill" data-filter="inactive">Revoked / Expired</button>
+      </div>
+
+      <div id="codesList" class="code-list">
+        <div class="empty-state">Loading codes…</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+const TOKEN_KEY = "fh_admin_token";
+const $ = id => document.getElementById(id);
+
+let adminToken = localStorage.getItem(TOKEN_KEY) || "";
+let allCodes = [];
+let selectedTier = "pro";
+let selectedExp = "never";
+let selectedUses = "unlimited";
+let activeFilter = "all";
+let lastCreatedShareUrl = "";
+
+let toastTimer = null;
+function showToast(msg) {
+  const el = $("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2500);
+}
+
+async function copyText(txt, okMsg = "📋 Share link copied!") {
+  try {
+    await navigator.clipboard.writeText(txt);
+  } catch (_) {
+    const ta = document.createElement("textarea");
+    ta.value = txt;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+  }
+  showToast(okMsg);
+}
+
+function esc(s) {
+  return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function fmtExpiry(iso) {
+  if (!iso) return "Never expires";
+  const ts = Date.parse(iso);
+  if (!Number.isFinite(ts)) return "Never expires";
+  const diff = ts - Date.now();
+  const dateStr = new Date(ts).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  if (diff <= 0) return `Expired (${dateStr})`;
+  const hrs = Math.floor(diff / 3600000);
+  if (hrs < 24) {
+    const mins = Math.max(1, Math.floor((diff % 3600000) / 60000));
+    return hrs > 0 ? `Expires in ${hrs}h ${mins}m` : `Expires in ${mins}m`;
+  }
+  const days = Math.floor(hrs / 24);
+  return `Expires in ${days}d (${dateStr})`;
+}
+
+async function apiAdmin(payload) {
+  const headers = { "Content-Type": "application/json" };
+  if (adminToken) headers["Authorization"] = `Bearer ${adminToken}`;
+  const res = await fetch("/api/admin", {
+    method: "POST",
+    headers,
+    body: JSON.stringify(payload),
+    cache: "no-store"
+  });
+  const data = await res.json().catch(() => ({ ok: false, error: "Invalid server response" }));
+  if (res.status === 401 && payload.action !== "login") {
+    adminToken = "";
+    localStorage.removeItem(TOKEN_KEY);
+    showLogin("Session expired — please sign in again.");
+  }
+  return { status: res.status, data };
+}
+
+function showLogin(errMsg = "") {
+  $("dashView").style.display = "none";
+  $("loginView").style.display = "block";
+  if (errMsg) {
+    $("loginErr").textContent = errMsg;
+    $("loginErr").classList.add("show");
+  } else {
+    $("loginErr").classList.remove("show");
+  }
+}
+
+function showDash() {
+  $("loginView").style.display = "none";
+  $("dashView").style.display = "block";
+}
+
+function renderCodes() {
+  const activeCount = allCodes.filter(c => c.status === "active").length;
+  const totalUses = allCodes.reduce((acc, c) => acc + (c.uses || 0), 0);
+  $("statActive").textContent = activeCount;
+  $("statUses").textContent = totalUses;
+  $("statTotal").textContent = allCodes.length;
+
+  const filtered = allCodes.filter(c => {
+    if (activeFilter === "active") return c.status === "active";
+    if (activeFilter === "inactive") return c.status !== "active";
+    return true;
+  });
+
+  const listEl = $("codesList");
+  if (!filtered.length) {
+    listEl.innerHTML = `<div class="empty-state">${allCodes.length ? "No codes match this filter." : "No access codes yet — generate your first one above!"}</div>`;
+    return;
+  }
+
+  listEl.innerHTML = filtered.map(c => {
+    const tierBadge = c.tier === "family"
+      ? `<span class="badge b-family">✨ Family</span>`
+      : `<span class="badge b-pro">👑 Pro Host</span>`;
+    const statusMap = {
+      active: `<span class="badge b-active">● Active</span>`,
+      revoked: `<span class="badge b-revoked">✕ Revoked</span>`,
+      expired: `<span class="badge b-expired">⏱ Expired</span>`,
+      exhausted: `<span class="badge b-exhausted">Maxed Out</span>`
+    };
+    const usesText = c.maxUses == null ? `${c.uses || 0} / ∞ used` : `${c.uses || 0} / ${c.maxUses} used`;
+    const revBtn = c.revoked
+      ? `<button type="button" class="btn btn-green-soft btn-sm" data-act="restore" data-code="${esc(c.code)}">♻️ Restore</button>`
+      : `<button type="button" class="btn btn-amber-soft btn-sm" data-act="revoke" data-code="${esc(c.code)}">🚫 Revoke</button>`;
+
+    return `
+      <div class="code-item ${c.status !== "active" ? "is-inactive" : ""}">
+        <div class="ci-top">
+          <div class="ci-code-wrap">
+            <span class="ci-code">${esc(c.code)}</span>
+            ${tierBadge}
+            ${statusMap[c.status] || statusMap.active}
+          </div>
+        </div>
+        ${c.label ? `<div class="ci-label">${esc(c.label)}</div>` : ""}
+        <div class="ci-meta">
+          <span>👥 ${usesText}</span>
+          <span>⏱ ${esc(fmtExpiry(c.expiresAt))}</span>
+        </div>
+        <div class="ci-actions">
+          <button type="button" class="btn btn-navy btn-sm" data-act="copy" data-url="${esc(c.shareUrl)}">📋 Copy Share Link</button>
+          <button type="button" class="btn btn-outline btn-sm" data-act="copycode" data-code="${esc(c.code)}">Copy Code</button>
+          ${revBtn}
+          <button type="button" class="btn btn-danger-soft btn-sm" data-act="delete" data-code="${esc(c.code)}">🗑️ Delete</button>
+        </div>
+      </div>`;
+  }).join("");
+}
+
+async function loadList() {
+  $("btnRefresh").disabled = true;
+  const { data } = await apiAdmin({ action: "list" });
+  $("btnRefresh").disabled = false;
+  if (data.ok) {
+    allCodes = data.codes || [];
+    showDash();
+    renderCodes();
+  }
+}
+
+// Event listeners
+$("loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  $("loginErr").classList.remove("show");
+  $("btnLogin").disabled = true;
+  $("btnLogin").textContent = "Signing in…";
+  const { data } = await apiAdmin({ action: "login", pin: $("inPin").value });
+  $("btnLogin").disabled = false;
+  $("btnLogin").textContent = "🔐 Sign In";
+  if (data.ok && data.adminToken) {
+    adminToken = data.adminToken;
+    localStorage.setItem(TOKEN_KEY, adminToken);
+    $("inPin").value = "";
+    showToast("👑 Owner Mode unlocked!");
+    await loadList();
+  } else {
+    $("loginErr").textContent = data.error || "Incorrect PIN.";
+    $("loginErr").classList.add("show");
+  }
+});
+
+$("btnSignOut").addEventListener("click", () => {
+  adminToken = "";
+  localStorage.removeItem(TOKEN_KEY);
+  showLogin();
+  showToast("Signed out");
+});
+
+document.querySelectorAll("#tierSelector .tier-opt").forEach(btn => {
+  btn.addEventListener("click", () => {
+    selectedTier = btn.dataset.tier;
+    document.querySelectorAll("#tierSelector .tier-opt").forEach(b => b.classList.toggle("active", b === btn));
+  });
+});
+
+document.querySelectorAll("#expiryPresets .pill").forEach(btn => {
+  btn.addEventListener("click", () => {
+    selectedExp = btn.dataset.exp;
+    document.querySelectorAll("#expiryPresets .pill").forEach(b => b.classList.toggle("active", b === btn));
+    $("customExpWrap").classList.toggle("show", selectedExp === "custom");
+  });
+});
+
+document.querySelectorAll("#usesPresets .pill").forEach(btn => {
+  btn.addEventListener("click", () => {
+    selectedUses = btn.dataset.uses;
+    document.querySelectorAll("#usesPresets .pill").forEach(b => b.classList.toggle("active", b === btn));
+    $("customUsesWrap").classList.toggle("show", selectedUses === "custom");
+  });
+});
+
+document.querySelectorAll("#filterBar .pill").forEach(btn => {
+  btn.addEventListener("click", () => {
+    activeFilter = btn.dataset.filter;
+    document.querySelectorAll("#filterBar .pill").forEach(b => b.classList.toggle("active", b === btn));
+    renderCodes();
+  });
+});
+
+$("createForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  $("createErr").classList.remove("show");
+  $("createdBanner").classList.remove("show");
+
+  const payload = {
+    action: "create",
+    code: $("inCustomCode").value.trim(),
+    tier: selectedTier,
+    label: $("inLabel").value.trim()
+  };
+
+  if (selectedUses === "unlimited") payload.maxUses = null;
+  else if (selectedUses === "custom") payload.maxUses = $("inCustomUses").value;
+  else payload.maxUses = Number(selectedUses);
+
+  if (selectedExp === "never") {
+    payload.expiresInHours = null;
+  } else if (selectedExp === "custom") {
+    const v = $("inCustomExp").value;
+    if (!v) {
+      $("createErr").textContent = "Please pick a custom expiration date & time.";
+      $("createErr").classList.add("show");
+      return;
+    }
+    payload.expiresAt = new Date(v).toISOString();
+  } else {
+    payload.expiresInHours = Number(selectedExp);
+  }
+
+  $("btnGenerate").disabled = true;
+  $("btnGenerate").textContent = "Generating…";
+  const { data } = await apiAdmin(payload);
+  $("btnGenerate").disabled = false;
+  $("btnGenerate").textContent = "⚡ Generate Code";
+
+  if (!data.ok) {
+    $("createErr").textContent = data.error || "Failed to generate code.";
+    $("createErr").classList.add("show");
+    return;
+  }
+
+  $("inCustomCode").value = "";
+  $("inLabel").value = "";
+  lastCreatedShareUrl = data.entry.shareUrl;
+  $("createdUrlText").textContent = lastCreatedShareUrl;
+  $("createdBanner").classList.add("show");
+  allCodes = [data.entry, ...allCodes];
+  renderCodes();
+  showToast(`⚡ Code ${data.entry.code} ready!`);
+});
+
+$("btnCopyCreated").addEventListener("click", () => copyText(lastCreatedShareUrl));
+$("btnRefresh").addEventListener("click", loadList);
+
+$("codesList").addEventListener("click", async e => {
+  const btn = e.target.closest("button[data-act]");
+  if (!btn) return;
+  const act = btn.dataset.act;
+  if (act === "copy") {
+    copyText(btn.dataset.url);
+    return;
+  }
+  if (act === "copycode") {
+    copyText(btn.dataset.code, `📋 Copied ${btn.dataset.code}`);
+    return;
+  }
+  const code = btn.dataset.code;
+  if (act === "revoke" || act === "restore") {
+    btn.disabled = true;
+    const { data } = await apiAdmin({ action: "revoke", code, revoked: act === "revoke" });
+    if (data.ok) {
+      allCodes = allCodes.map(c => c.code === code ? data.entry : c);
+      renderCodes();
+      showToast(act === "revoke" ? `🚫 ${code} revoked` : `♻️ ${code} restored`);
+    } else {
+      btn.disabled = false;
+      showToast(data.error || "Update failed");
+    }
+  } else if (act === "delete") {
+    if (!confirm(`Permanently delete code "${code}"? Anyone using it will revert to Free tier.`)) return;
+    btn.disabled = true;
+    const { data } = await apiAdmin({ action: "delete", code });
+    if (data.ok) {
+      allCodes = allCodes.filter(c => c.code !== code);
+      renderCodes();
+      showToast(`🗑️ ${code} deleted`);
+    } else {
+      btn.disabled = false;
+      showToast(data.error || "Delete failed");
+    }
+  }
+});
+
+// Boot
+(async function boot() {
+  if (adminToken) {
+    await loadList();
+  } else {
+    showLogin();
+  }
+})();
+</script>
+</body>
+</html>

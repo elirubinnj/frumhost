@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="FrumHost" />
+<title>FrumHost — Luxury Shabbos &amp; Guest Sign Studio</title>
+<meta property="og:title" content="FrumHost — Luxury Shabbos & Guest Sign Studio" />
+<meta property="og:description" content="5 luxury designs, 5 color palettes, live weekly Parsha & Zmanim (English + Hebrew), Weekday Stay dates, full box editor & 1-tap phone printing." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231B2A4A'/><text x='50' y='68' font-size='54' text-anchor='middle'>🕯️</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<style>
+  @page { size: letter portrait; margin: 0.25in; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  :root, [data-theme="navy"] {
+    --primary: #1B2A4A; --accent: #C9A961; --accent-dark: #9A7830;
+    --pill-bg: #F4EDE0; --pill-border: #D9C38C; --tint: #FAF7F0; --tint-border: #E5D9BD;
+    --icon-gold-bg: #F3E8CE; --icon-gold-border: #D9C086;
+    --lock-eyebrow: #E7CA7E; --lock-doors: #F6E9C4; --lock-sub: #CBD5E1; --tile-border: #DFE5EE;
+  }
+  [data-theme="jerusalem"] {
+    --primary: #253B30; --accent: #B89352; --accent-dark: #8A6A32;
+    --pill-bg: #EFECE2; --pill-border: #D2C3A3; --tint: #F7F4EC; --tint-border: #DFD6C2;
+    --icon-gold-bg: #ECE5D4; --icon-gold-border: #CDBB94;
+    --lock-eyebrow: #E5CE9A; --lock-doors: #F4E9CC; --lock-sub: #D1DDD5; --tile-border: #DDE3DD;
+  }
+  [data-theme="burgundy"] {
+    --primary: #4B192B; --accent: #C89B62; --accent-dark: #966D3A;
+    --pill-bg: #F7EEE8; --pill-border: #DFC0A0; --tint: #FBF5F0; --tint-border: #E9D7C8;
+    --icon-gold-bg: #F4E5D8; --icon-gold-border: #DCBC9C;
+    --lock-eyebrow: #ECC798; --lock-doors: #F8E8D4; --lock-sub: #E4CCD4; --tile-border: #E8DCE0;
+  }
+  [data-theme="slate"] {
+    --primary: #1F2937; --accent: #94A3B8; --accent-dark: #475569;
+    --pill-bg: #F1F5F9; --pill-border: #CBD5E1; --tint: #F8FAFC; --tint-border: #E2E8F0;
+    --icon-gold-bg: #E2E8F0; --icon-gold-border: #CBD5E1;
+    --lock-eyebrow: #CBD5E1; --lock-doors: #F1F5F9; --lock-sub: #CBD5E1; --tile-border: #E2E8F0;
+  }
+  [data-theme="espresso"] {
+    --primary: #3A261D; --accent: #C48A4F; --accent-dark: #946230;
+    --pill-bg: #F6EDE3; --pill-border: #DEC0A1; --tint: #FBF7F2; --tint-border: #E8D9C8;
+    --icon-gold-bg: #F2E4D4; --icon-gold-border: #DAB894;
+    --lock-eyebrow: #E8C094; --lock-doors: #F7E5CE; --lock-sub: #DED0C8; --tile-border: #E7DDD5;
+  }
+
+  body {
+    margin: 0; padding: 0; background: #EFECE5;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1E293B;
+  }
+
+  .app-shell { max-width: 860px; margin: 0 auto; padding: 12px 12px 36px 12px; }
+  .control-panel {
+    background: #FFFFFF; border: 1px solid #DCD4C0; border-radius: 16px;
+    padding: 15px; box-shadow: 0 6px 24px rgba(27, 42, 74, 0.08); margin-bottom: 16px;
+  }
+  .cp-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 11px; flex-wrap: wrap; }
+  .cp-brand { display: flex; align-items: center; gap: 9px; }
+  .cp-badge {
+    width: 36px; height: 36px; border-radius: 10px; background: var(--primary); color: var(--lock-eyebrow);
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .cp-title { font-size: 15.5px; font-weight: 800; color: #1B2A4A; line-height: 1.15; }
+  .cp-sub { font-size: 11.5px; color: #64748B; }
+  .status-pill {
+    font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px;
+    background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0;
+  }
+  .status-pill.loading { background: #FEF3C7; color: #92400E; border-color: #FDE68A; }
+  .status-pill.err { background: #FEF2F2; color: #991B1B; border-color: #FECACA; }
+
+  .bar-label { font-size: 10.5px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #64748B; margin: 0 0 5px 2px; }
+  .bar-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .chip-btn {
+    border: 1.5px solid #D5CCB4; background: #FAF7F0; color: #1B2A4A;
+    border-radius: 9px; padding: 7px 10px; font-size: 12.2px; font-weight: 700;
+    cursor: pointer; flex: 1 1 auto; text-align: center;
+  }
+  .chip-btn.active { background: var(--primary); color: #FFFFFF; border-color: var(--primary); }
+
+  .picker-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 11px; }
+  .style-btn, .theme-btn {
+    border: 1.5px solid #E2DDD0; background: #FFFFFF; border-radius: 10px; padding: 6px 4px;
+    cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px;
+    font-size: 10.3px; font-weight: 700; color: #334155; text-align: center;
+  }
+  .style-btn.active, .theme-btn.active { border-color: var(--primary); background: #FAF7F0; box-shadow: 0 0 0 2px rgba(27, 42, 74, 0.14); }
+  .style-ico { font-size: 16px; line-height: 1.1; }
+  .swatch-dots { display: flex; gap: 3px; }
+  .swatch-dot { width: 13px; height: 13px; border-radius: 999px; border: 1px solid rgba(0,0,0,0.12); }
+
+  .quick-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  @media (max-width: 540px) { .quick-row { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 10.8px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #475569; }
+  .field input, .field textarea, .field select {
+    width: 100%; padding: 9px 11px; border: 1.5px solid #CBD5E1; border-radius: 9px;
+    font-size: 14.5px; font-weight: 600; color: #0F172A; background: #FFFFFF; outline: none; font-family: inherit;
+  }
+  .field textarea { min-height: 54px; resize: vertical; font-weight: 500; font-size: 13.5px; }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(27, 42, 74, 0.1); }
+  .field input.code-input {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.14em; text-transform: uppercase; font-size: 17px; font-weight: 800;
+  }
+
+  .actions-row { display: grid; grid-template-columns: 1.35fr 1fr; gap: 9px; margin-bottom: 8px; }
+  @media (max-width: 480px) { .actions-row { grid-template-columns: 1fr; } }
+  .btn-primary {
+    background: var(--primary); color: #FFFFFF; border: 1.5px solid var(--accent);
+    border-radius: 11px; padding: 12px 15px; font-size: 15px; font-weight: 800;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px;
+  }
+  .btn-secondary {
+    background: #FAF7F0; color: #1B2A4A; border: 1.5px solid #D5C59A;
+    border-radius: 11px; padding: 12px 14px; font-size: 14px; font-weight: 700;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px;
+  }
+
+  details.settings-drawer { border-top: 1px solid #EAE4D5; padding-top: 9px; margin-top: 6px; }
+  details.settings-drawer summary {
+    font-size: 13px; font-weight: 800; color: #1B2A4A; cursor: pointer; user-select: none;
+    list-style: none; display: flex; align-items: center; justify-content: space-between; padding: 4px 2px;
+  }
+  .tab-nav { display: flex; gap: 5px; overflow-x: auto; padding: 10px 0 8px 0; border-bottom: 1px solid #E5E7EB; margin-bottom: 10px; }
+  .tab-btn {
+    border: 1px solid #CBD5E1; background: #F8FAFC; color: #475569; border-radius: 8px;
+    padding: 6px 11px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap;
+  }
+  .tab-btn.active { background: var(--primary); color: #FFFFFF; border-color: var(--primary); }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+  .adv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  @media (max-width: 520px) { .adv-grid { grid-template-columns: 1fr; } }
+
+  .toggle-line {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #FAF7F0; border: 1px solid #E5DAC0; border-radius: 10px;
+    padding: 8px 12px; margin-bottom: 8px; font-size: 13px; font-weight: 700; color: #1B2A4A;
+  }
+  .toggle-line input[type="checkbox"] { width: 19px; height: 19px; accent-color: var(--primary); }
+
+  .card-editor-item { background: #FAF9F6; border: 1px solid #E2DDD0; border-radius: 11px; padding: 10px; margin-bottom: 9px; }
+  .cei-head { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 8px; }
+  .cei-num { font-size: 11.5px; font-weight: 800; color: #64748B; text-transform: uppercase; }
+  .cei-btns { display: flex; gap: 5px; }
+  .mini-btn { border: 1px solid #CBD5E1; background: #FFFFFF; color: #334155; border-radius: 7px; padding: 4px 8px; font-size: 12px; font-weight: 700; cursor: pointer; }
+  .mini-btn.danger { color: #B91C1C; border-color: #FECACA; background: #FEF2F2; }
+  .add-card-btn { width: 100%; border: 1.5px dashed #B49154; background: #FAF7F0; color: #1B2A4A; border-radius: 10px; padding: 10px; font-size: 13px; font-weight: 800; cursor: pointer; margin-top: 4px; }
+  .cei-row { display: grid; grid-template-columns: 115px 1fr; gap: 7px; margin-bottom: 7px; }
+  @media (max-width: 480px) { .cei-row { grid-template-columns: 1fr; } }
+
+  .tier-banner {
+    background: #FFFBEB; border: 1px solid #FDE68A; color: #92400E;
+    border-radius: 10px; padding: 9px 12px; font-size: 12.2px; margin-bottom: 10px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap;
+  }
+  .locked-block { opacity: 0.48; pointer-events: none; }
+  .tip-note { text-align: center; font-size: 11.5px; color: #64748B; margin: 8px 0 0 0; }
+
+  .preview-stage { width: 100%; overflow: hidden; display: flex; justify-content: center; }
+  .preview-scaler { transform-origin: top center; width: 7.98in; }
+
+  .outer-frame {
+    width: 7.98in; height: 10.44in; overflow: hidden;
+    border: 2.5px solid var(--primary); border-radius: 14px; padding: 5px;
+    background: #FFFFFF; display: flex; box-shadow: 0 12px 36px rgba(15, 23, 42, 0.14);
+  }
+  .inner-frame {
+    width: 100%; border: 1.2px solid var(--accent); border-radius: 9px;
+    background: linear-gradient(180deg, #fbfaf3 0%, #fbfaf3 18%, #FFFFFF 30%, #FFFFFF 93%, var(--tint) 100%);
+    padding: 4px 19px 9px 19px; display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .he-font { font-family: "Frank Ruhl Libre", Georgia, serif; }
+  .he-sans { font-family: "Heebo", -apple-system, sans-serif; }
+  .ltr-num { direction: ltr; unicode-bidi: isolate; display: block; }
+  .outer-frame.rtl-mode { direction: rtl; font-family: "Heebo", -apple-system, sans-serif; }
+  .outer-frame.rtl-mode .sign-h1 { font-family: "Frank Ruhl Libre", Georgia, serif; }
+  .outer-frame.rtl-mode .footer-line { font-family: "Frank Ruhl Libre", Georgia, serif; font-style: normal; }
+
+  .hero { text-align: center; }
+  .banner-wrap { width: 100%; height: 112px; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 1px; }
+  .banner-wrap img { height: 112px; width: auto; max-width: 100%; object-fit: contain; display: block; }
+
+  .monogram-crest { display: inline-flex; align-items: center; justify-content: center; gap: 14px; margin: 8px 0 4px 0; }
+  .crest-line { width: 88px; height: 1.5px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .crest-medallion {
+    width: 72px; height: 72px; border-radius: 999px; border: 2px solid var(--primary);
+    padding: 3px; background: #FFFFFF; display: flex; align-items: center; justify-content: center;
+  }
+  .crest-inner {
+    width: 100%; height: 100%; border-radius: 999px; border: 1.2px solid var(--accent); background: var(--tint);
+    display: flex; align-items: center; justify-content: center;
+    font-family: Georgia, "Times New Roman", serif; font-size: 31pt; font-weight: 700; color: var(--primary); line-height: 1;
+  }
+
+  .he-greeting { font-family: "Frank Ruhl Libre", Georgia, serif; font-size: 16pt; font-weight: 700; color: var(--accent-dark); margin: 0 0 1px 0; line-height: 1.15; direction: rtl; }
+  .sign-h1 { font-family: Georgia, "Times New Roman", serif; font-size: 27.5pt; font-weight: 700; color: var(--primary); margin: 0 0 5px 0; line-height: 1.06; letter-spacing: -0.01em; }
+  .address-pill {
+    display: inline-block; background: var(--pill-bg); border: 1px solid var(--pill-border);
+    border-radius: 999px; padding: 3.5px 16px; font-size: 10.6pt; font-weight: 700;
+    color: var(--primary); letter-spacing: 0.02em; margin-bottom: 5px;
+  }
+  .address-pill span.dot { color: var(--accent-dark); margin: 0 7px; }
+  .welcome-note { font-size: 10.4pt; color: #475569; margin: 0 auto 7px auto; line-height: 1.28; }
+
+  .lock-card { background: var(--primary); border: 2px solid var(--accent); border-radius: 11px; padding: 8px 16px; text-align: center; margin-bottom: 8px; }
+  .lock-eyebrow { font-size: 8.6pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lock-eyebrow); margin-bottom: 2px; }
+  .lock-code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 38pt; font-weight: 800; letter-spacing: 0.2em; padding-left: 0.2em;
+    color: #FFFFFF; line-height: 1.04; margin: 1px 0 3px 0; direction: ltr; unicode-bidi: isolate;
+  }
+  .lock-blank-box { width: 72%; height: 54px; margin: 4px auto 5px auto; background: #FFFFFF; border: 2px dashed var(--accent); border-radius: 8px; }
+  .lock-doors { font-size: 10.3pt; font-weight: 700; color: var(--lock-doors); margin-bottom: 1px; }
+  .lock-sub { font-size: 9pt; color: var(--lock-sub); margin: 0; }
+
+  .zmanim-card { background: var(--tint); border: 1.4px solid var(--pill-border); border-radius: 10px; padding: 7px 11px 8px 11px; margin-bottom: 8px; }
+  .zmanim-head { text-align: center; font-size: 8.6pt; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 5px; }
+  .zmanim-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+  .zmanim-grid-3 { display: grid; grid-template-columns: 1.1fr 1.1fr 1.3fr; gap: 7px; }
+  .zmanim-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .zman-cell { background: #FFFFFF; border: 1px solid var(--tint-border); border-radius: 8px; padding: 5.5px 6px; text-align: center; }
+  .zman-cell.blank-cell { text-align: start; padding: 5px 8px 6px 8px; }
+  .zman-label { font-size: 7.5pt; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #64748B; margin-bottom: 2px; }
+  .zman-cell.blank-cell .zman-label { color: var(--primary); font-weight: 800; }
+  .zman-val { font-size: 11.6pt; font-weight: 800; color: var(--primary); line-height: 1.16; margin-bottom: 1.5px; }
+  .zman-sub { font-size: 7.8pt; color: #64748B; font-weight: 500; }
+  .write-box { height: 42px; background: #FFFFFF; border: 1.4px dashed var(--accent); border-radius: 6px; }
+  .stay-joke-line { text-align: center; font-size: 9pt; font-style: italic; color: #475569; margin: 5px 0 0 0; }
+
+  .sec-label {
+    font-size: 9pt; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent-dark); display: flex; align-items: center; gap: 10px; margin: 0 0 5.5px 0;
+  }
+  .sec-label::before, .sec-label::after { content: ""; flex: 1; height: 1px; background: var(--tint-border); }
+
+  .perks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+  .perk-card { background: var(--tint); border: 1px solid var(--tint-border); border-radius: 9px; padding: 8px 10px; display: flex; align-items: flex-start; gap: 8.5px; }
+  .icon-badge {
+    width: 29px; height: 29px; border-radius: 8px; background: var(--primary); color: var(--lock-doors);
+    display: flex; align-items: center; justify-content: center; flex: 0 0 auto; margin-top: 1px;
+  }
+  .icon-badge.gold { background: var(--icon-gold-bg); color: var(--primary); border: 1px solid var(--icon-gold-border); }
+  .card-title { font-size: 10.8pt; font-weight: 700; color: var(--primary); margin: 0 0 1.5px 0; line-height: 1.16; }
+  .card-body { font-size: 9.6pt; color: #334155; margin: 0; line-height: 1.26; }
+
+  .favors-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 4px; }
+  .favor-tile { background: #FFFFFF; border: 1px solid var(--tile-border); border-radius: 9px; padding: 7px 9px; display: flex; align-items: flex-start; gap: 8px; }
+
+  .footer { text-align: center; border-top: 1px solid var(--tint-border); padding-top: 5.5px; margin-top: 2px; }
+  .footer-line { font-family: Georgia, "Times New Roman", serif; font-size: 11.2pt; font-style: italic; color: var(--primary); margin: 0; }
+  .watermark-line { font-size: 7.5pt; color: #94A3B8; margin-top: 2px; letter-spacing: 0.04em; }
+
+  .outer-frame.compact .banner-wrap { height: 88px; }
+  .outer-frame.compact .banner-wrap img { height: 88px; }
+  .outer-frame.compact .crest-medallion { width: 58px; height: 58px; }
+  .outer-frame.compact .crest-inner { font-size: 25pt; }
+  .outer-frame.compact .sign-h1 { font-size: 24.5pt; margin-bottom: 3px; }
+  .outer-frame.compact .he-greeting { font-size: 14pt; }
+  .outer-frame.compact .lock-code { font-size: 34pt; }
+  .outer-frame.compact .card-title { font-size: 10pt; }
+  .outer-frame.compact .card-body { font-size: 9pt; line-height: 1.2; }
+  .outer-frame.compact .favor-tile { padding: 5.5px 8px; }
+  .outer-frame.compact .perk-card { padding: 6.5px 9px; }
+
+  @media print {
+    html, body { background: #FFFFFF !important; margin: 0 !important; padding: 0 !important; }
+    .no-print { display: none !important; }
+    .app-shell { max-width: none !important; padding: 0 !important; margin: 0 !important; }
+    .preview-stage { display: block !important; overflow: visible !important; height: auto !important; }
+    .preview-scaler { transform: none !important; width: 100% !important; margin: 0 !important; }
+    .outer-frame { width: 100% !important; height: 10.44in !important; box-shadow: none !important; page-break-after: avoid !important; break-inside: avoid !important; }
+  }
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <div class="control-panel no-print">
+    <div class="cp-top">
+      <div class="cp-brand">
+        <div class="cp-badge">🕯️</div>
+        <div>
+          <div class="cp-title">FrumHost Sign Studio</div>
+          <div class="cp-sub">5 Luxury Designs • Auto-Zmanim &amp; Weekday Stays • Print From Phone</div>
+        </div>
+      </div>
+      <div id="statusPill" class="status-pill loading">Loading Zmanim…</div>
+    </div>
+
+    <div id="tierBanner" class="tier-banner" style="display:none">
+      <span id="tierBannerText"></span>
+      <button type="button" class="mini-btn" id="btnBackToOwner">Back to Owner (Pro)</button>
+    </div>
+
+    <div class="bar-label">Stay Type</div>
+    <div class="bar-row" id="stayModeBar">
+      <button type="button" class="chip-btn active" data-mode="shabbos">🕯️ Shabbos (Zmanim)</button>
+      <button type="button" class="chip-btn" data-mode="weekday">🗓️ Weekday / Dates</button>
+      <button type="button" class="chip-btn" data-mode="none">✨ No Zmanim</button>
+    </div>
+
+    <div class="bar-label">Language</div>
+    <div class="bar-row" id="langBar">
+      <button type="button" class="chip-btn active" data-lang="en">English</button>
+      <button type="button" class="chip-btn" data-lang="bi">Eng + עברית</button>
+      <button type="button" class="chip-btn" data-lang="he">עברית (RTL)</button>
+    </div>
+
+    <div class="bar-label">Luxury Design Artwork (5 Styles)</div>
+    <div class="picker-grid-5" id="designStrip">
+      <button type="button" class="style-btn active" data-design="candles"><span class="style-ico">🕯️</span><span>Candlesticks</span></button>
+      <button type="button" class="style-btn" data-design="kiddush"><span class="style-ico">🍷</span><span>Kiddush</span></button>
+      <button type="button" class="style-btn" data-design="key"><span class="style-ico">🗝️</span><span>Guest Key</span></button>
+      <button type="button" class="style-btn" data-design="jerusalem"><span class="style-ico">🏛️</span><span>Jerusalem</span></button>
+      <button type="button" class="style-btn" data-design="monogram"><span class="style-ico">👑</span><span>Monogram</span></button>
+    </div>
+
+    <div class="bar-label">Color Palette</div>
+    <div class="picker-grid-5" id="themeStrip">
+      <button type="button" class="theme-btn active" data-theme="navy">
+        <div class="swatch-dots"><span class="swatch-dot" style="background:#1B2A4A"></span><span class="swatch-dot" style="background:#C9A961"></span></div>
+        <span>Navy Gold</span>
+      </button>
+      <button type="button" class="theme-btn" data-theme="jerusalem">
+        <div class="swatch-dots"><span class="swatch-dot" style="background:#253B30"></span><span class="swatch-dot" style="background:#B89352"></span></div>
+        <span>Jerusalem</span>
+      </button>
+      <button type="button" class="theme-btn" data-theme="burgundy">
+        <div class="swatch-dots"><span class="swatch-dot" style="background:#4B192B"></span><span class="swatch-dot" style="background:#C89B62"></span></div>
+        <span>Burgundy</span>
+      </button>
+      <button type="button" class="theme-btn" data-theme="slate">
+        <div class="swatch-dots"><span class="swatch-dot" style="background:#1F2937"></span><span class="swatch-dot" style="background:#94A3B8"></span></div>
+        <span>Slate</span>
+      </button>
+      <button type="button" class="theme-btn" data-theme="espresso">
+        <div class="swatch-dots"><span class="swatch-dot" style="background:#3A261D"></span><span class="swatch-dot" style="background:#C48A4F"></span></div>
+        <span>Espresso</span>
+      </button>
+    </div>
+
+    <div id="shabbosQuickControls">
+      <div class="bar-row">
+        <button type="button" class="chip-btn active" id="btnThisWeek">This Shabbos</button>
+        <button type="button" class="chip-btn" id="btnNextWeek">Next Shabbos</button>
+        <button type="button" class="chip-btn" id="btnPlus2">+2 Weeks</button>
+      </div>
+      <div class="quick-row">
+        <div class="field"><label for="inCode">Lock / Door Code</label><input id="inCode" class="code-input" type="text" value="C1234Z" autocomplete="off" /></div>
+        <div class="field"><label for="inFriday">Erev Shabbos (Friday)</label><input id="inFriday" type="date" /></div>
+      </div>
+    </div>
+
+    <div id="weekdayQuickControls" style="display:none">
+      <div class="quick-row">
+        <div class="field"><label for="inCheckIn">Check-In Date</label><input id="inCheckIn" type="date" /></div>
+        <div class="field"><label for="inCheckOut">Check-Out Date</label><input id="inCheckOut" type="date" /></div>
+      </div>
+      <div class="quick-row">
+        <div class="field"><label for="inCodeWk">Door / Entry Code</label><input id="inCodeWk" class="code-input" type="text" value="C1234Z" autocomplete="off" /></div>
+        <div class="field"><label for="inGuestLabel">Guest Name (Optional)</label><input id="inGuestLabel" type="text" placeholder="e.g. The Cohen Family" /></div>
+      </div>
+    </div>
+
+    <div id="noneQuickControls" style="display:none;margin-bottom:10px;">
+      <div class="field"><label for="inCodeNone">Door / Shabbos Lock Code</label><input id="inCodeNone" class="code-input" type="text" value="C1234Z" autocomplete="off" /></div>
+    </div>
+
+    <div class="actions-row">
+      <button type="button" class="btn-primary" id="btnPrint">🖨️ Print / Save PDF</button>
+      <button type="button" class="btn-secondary" id="btnCopyWa">💬 Copy WhatsApp</button>
+    </div>
+
+    <details class="settings-drawer" id="settingsDrawer">
+      <summary><span>⚙️ Customize Words, Monogram, Add/Move Boxes &amp; Zmanim</span><span>▾</span></summary>
+      <div class="tab-nav">
+        <button type="button" class="tab-btn active" data-tab="tabGeneral">Header &amp; Stay Text</button>
+        <button type="button" class="tab-btn" data-tab="tabPerks">Help Yourself Boxes</button>
+        <button type="button" class="tab-btn" data-tab="tabFavors">Sweet Favors Boxes</button>
+        <button type="button" class="tab-btn" data-tab="tabZmanim">Zmanim &amp; ZIP</button>
+        
+      </div>
+
+      <div class="tab-pane active" id="tabGeneral">
+        <div class="toggle-line"><span>Dry-Erase Blank Zmanim Boxes (2×2)</span><input type="checkbox" id="chkBlankZmanim" /></div>
+        <div class="toggle-line"><span>Blank Lock Code Box (Dry-Erase)</span><input type="checkbox" id="chkBlankCode" /></div>
+        <div class="adv-grid">
+          <div class="field" id="wrapHeadline"><label for="inHeadline">Family / Main Headline</label><input id="inHeadline" type="text" /></div>
+          <div class="field" id="wrapMonogram"><label for="inMonogram">Monogram Letter(s)</label><input id="inMonogram" type="text" maxlength="3" placeholder="G" /></div>
+          <div class="field" id="wrapAddr"><label for="inAddr">Address / Entrance</label><input id="inAddr" type="text" /></div>
+          <div class="field" id="wrapHeGreet"><label for="inHeGreet">Hebrew Greeting Line</label><input id="inHeGreet" type="text" dir="rtl" /></div>
+          <div class="field" style="grid-column:1/-1" id="wrapWelcome"><label for="inWelcome">Welcome Subtitle</label><input id="inWelcome" type="text" /></div>
+          <div class="field" id="wrapLockDoors"><label for="inLockDoors">Lock Door Line</label><input id="inLockDoors" type="text" /></div>
+          <div class="field" id="wrapLockSub"><label for="inLockSub">Lock Fun Reminder</label><input id="inLockSub" type="text" /></div>
+          <div class="field" id="wrapStayInNote"><label for="inStayInNote">Weekday Check-In Note</label><input id="inStayInNote" type="text" /></div>
+          <div class="field" id="wrapStayOutNote"><label for="inStayOutNote">Weekday Check-Out Note</label><input id="inStayOutNote" type="text" /></div>
+          <div class="field" style="grid-column:1/-1" id="wrapStayJoke"><label for="inStayJoke">Weekday Check-In/Out Fun Line</label><input id="inStayJoke" type="text" /></div>
+          <div class="field" id="wrapSec1"><label for="inSec1">Section 1 Header</label><input id="inSec1" type="text" /></div>
+          <div class="field" id="wrapSec2"><label for="inSec2">Section 2 Header</label><input id="inSec2" type="text" /></div>
+          <div class="field" style="grid-column:1/-1" id="wrapFooter"><label for="inFooter">Footer Sign-Off</label><input id="inFooter" type="text" /></div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="tabPerks">
+        <div id="perksEditorList"></div>
+        <button type="button" class="add-card-btn" id="btnAddPerk">+ Add Box to “Help Yourself”</button>
+      </div>
+
+      <div class="tab-pane" id="tabFavors">
+        <div id="favorsEditorList"></div>
+        <button type="button" class="add-card-btn" id="btnAddFavor">+ Add Box to “A Few Sweet Favors”</button>
+      </div>
+
+      <div class="tab-pane" id="tabZmanim">
+        <div class="adv-grid">
+          <div class="field"><label for="inZip">ZIP Code (Auto-Zmanim)</label><input id="inZip" type="text" value="08701" inputmode="numeric" /></div>
+          <div class="field"><label for="inCity">City Label</label><input id="inCity" type="text" value="Lakewood, NJ" /></div>
+          <div class="field"><label for="inParsha">Parsha (English)</label><input id="inParsha" type="text" /></div>
+          <div class="field"><label for="inParshaHe">Parsha (Hebrew)</label><input id="inParshaHe" type="text" dir="rtl" /></div>
+          <div class="field"><label for="inHdate">Hebrew Date (English)</label><input id="inHdate" type="text" /></div>
+          <div class="field"><label for="inHdateHe">Hebrew Date (Hebrew)</label><input id="inHdateHe" type="text" dir="rtl" /></div>
+          <div class="field"><label for="inCandles">Licht Bentchen</label><input id="inCandles" type="text" /></div>
+          <div class="field"><label for="inShkiah">Shkiah</label><input id="inShkiah" type="text" /></div>
+          <div class="field"><label for="inShema">Sof Zman Krias Shema</label><input id="inShema" type="text" /></div>
+          <div class="field"><label for="inMotzei72">Motzei Shabbos (72 Min)</label><input id="inMotzei72" type="text" /></div>
+          <div class="field" style="grid-column:1/-1"><label for="inMotzeiSub">Motzei Shabbos Subline</label><input id="inMotzeiSub" type="text" /></div>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+          <button type="button" class="mini-btn" id="btnRefetch">🔄 Re-Pull Live Zmanim</button>
+          <button type="button" class="mini-btn danger" id="btnResetAll">↩️ Reset All Text &amp; Boxes to Default</button>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="tabTiers">
+        <p style="font-size:12.5px;color:#475569;margin:0 0 9px 0;">
+          Preview how guests/hosts experience each FrumHost.com tier (yours stays on <strong>Owner / Full Pro</strong>):
+        </p>
+        <div class="bar-row">
+          <button type="button" class="chip-btn active" data-tier="pro">Owner / $18 Pro</button>
+          <button type="button" class="chip-btn" data-tier="basic">$9 Family</button>
+          <button type="button" class="chip-btn" data-tier="free">Free ($0)</button>
+        </div>
+        <div style="font-size:12px;color:#334155;background:#FAF7F0;border:1px solid #E5DAC0;border-radius:10px;padding:10px;line-height:1.45;">
+          • <strong>Free ($0):</strong> Own Family Name + Lock Code + Live Zmanim + English <em>or</em> Hebrew (not bilingual) + 1 Classic Design &amp; Color + subtle <em>FrumHost.com</em> footer.<br/>
+          • <strong>Family ($9/yr):</strong> + Custom Address/Entrance, all 5 Color Palettes, Bilingual (Eng + עברית), Weekday Stay Dates, 1-tap WhatsApp Copy &amp; No Watermark.<br/>
+          • <strong>Pro Host ($18/yr):</strong> + All 5 Luxury Art Designs (Candlesticks, Kiddush &amp; Challah, Guest Key, Jerusalem Arch, Monogram Crest), Full Box Editor (edit/add/delete/reorder), &amp; Blank Dry-Erase Master.
+        </div>
+      </div>
+    </details>
+    <p class="tip-note">iPhone tip: Tap Share → <strong>Add to Home Screen</strong>. Printing prints only the clean 1-page sign below.</p>
+  </div>
+
+  <div class="preview-stage" id="previewStage">
+    <div class="preview-scaler" id="previewScaler">
+      <div class="outer-frame" id="signCard">
+        <div class="inner-frame">
+          <div>
+            <div class="hero">
+              <div class="banner-wrap" id="outBannerWrap">
+                <img id="outBannerImg" src="candles.jpg" alt="Hospitality Artwork" />
+                <div class="monogram-crest" id="outMonogramWrap" style="display:none">
+                  <div class="crest-line"></div>
+                  <div class="crest-medallion"><div class="crest-inner" id="outMonogramChar">G</div></div>
+                  <div class="crest-line"></div>
+                </div>
+              </div>
+              <div class="he-greeting" id="outHeGreet" style="display:none"></div>
+              <h1 class="sign-h1" id="outHeadline"></h1>
+              <div class="address-pill" id="outAddr"></div>
+              <p class="welcome-note" id="outWelcome"></p>
+            </div>
+
+            <div class="lock-card">
+              <div class="lock-eyebrow" id="outLockEyebrow"></div>
+              <div class="lock-code" id="outCode">C1234Z</div>
+              <div class="lock-blank-box" id="outCodeBlank" style="display:none">&nbsp;</div>
+              <div class="lock-doors" id="outLockDoors"></div>
+              <p class="lock-sub" id="outLockSub"></p>
+            </div>
+
+            <div class="zmanim-card" id="zmanimFilledBox">
+              <div class="zmanim-head" id="outZmanHead"></div>
+              <div class="zmanim-grid-4">
+                <div class="zman-cell"><div class="zman-label" id="lblParsha">Parsha</div><div class="zman-val" id="outParsha">—</div><div class="zman-sub" id="outHdate">&nbsp;</div></div>
+                <div class="zman-cell"><div class="zman-label" id="lblCandles">Licht Bentchen</div><div class="zman-val ltr-num" id="outCandles">—</div><div class="zman-sub ltr-num" id="outShkiah">&nbsp;</div></div>
+                <div class="zman-cell"><div class="zman-label" id="lblShema">Sof Zman Krias Shema</div><div class="zman-val ltr-num" id="outShema">—</div><div class="zman-sub" id="lblShemaSub">MGA &bull; GRA</div></div>
+                <div class="zman-cell"><div class="zman-label" id="lblMotzei">Motzei Shabbos</div><div class="zman-val ltr-num"><span id="outMotzei72">—</span> <span style="font-size:8.3pt;font-weight:700;color:var(--accent-dark);">(72)</span></div><div class="zman-sub ltr-num" id="outMotzeiSub">&nbsp;</div></div>
+              </div>
+            </div>
+
+            <div class="zmanim-card" id="zmanimBlankBox" style="display:none">
+              <div class="zmanim-head" id="outZmanHeadBlank"></div>
+              <div class="zmanim-grid-2x2">
+                <div class="zman-cell blank-cell"><div class="zman-label" id="blParsha">Parsha</div><div class="write-box">&nbsp;</div></div>
+                <div class="zman-cell blank-cell"><div class="zman-label" id="blCandles">Licht Bentchen (Candle Lighting)</div><div class="write-box">&nbsp;</div></div>
+                <div class="zman-cell blank-cell"><div class="zman-label" id="blShema">Sof Zman Krias Shema</div><div class="write-box">&nbsp;</div></div>
+                <div class="zman-cell blank-cell"><div class="zman-label" id="blMotzei">Motzei Shabbos / 72 Min</div><div class="write-box">&nbsp;</div></div>
+              </div>
+            </div>
+
+            <div class="zmanim-card" id="weekdayStayBox" style="display:none">
+              <div class="zmanim-head" id="outStayHead">Your Stay With Us</div>
+              <div class="zmanim-grid-3">
+                <div class="zman-cell"><div class="zman-label" id="lblCheckIn">Check-In</div><div class="zman-val" id="outCheckInDate">—</div><div class="zman-sub" id="outStayInNote">Whenever you arrive!</div></div>
+                <div class="zman-cell"><div class="zman-label" id="lblCheckOut">Check-Out</div><div class="zman-val" id="outCheckOutDate">—</div><div class="zman-sub" id="outStayOutNote">Whenever you’re ready!</div></div>
+                <div class="zman-cell"><div class="zman-label" id="lblRate">Resort Fee</div><div class="zman-val" id="outRateVal">0% (On the House)</div><div class="zman-sub" id="outNightsCount">5-Star Hospitality</div></div>
+              </div>
+              <p class="stay-joke-line" id="outStayJoke"></p>
+            </div>
+
+            <div class="sec-label" id="outSec1"></div>
+            <div class="perks-grid" id="outPerksGrid"></div>
+
+            <div class="sec-label" id="outSec2"></div>
+            <div class="favors-grid" id="outFavorsGrid"></div>
+          </div>
+
+          <div class="footer">
+            <p class="footer-line" id="outFooter"></p>
+            <div class="watermark-line" id="outWatermark" style="display:block">Made with FrumHost.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const DESIGN_FILES = { candles: "candles.jpg", kiddush: "kiddush.jpg", key: "welcome_key.jpg", jerusalem: "jerusalem.jpg", monogram: null };
+
+const ICONS = {
+  coffee: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>',
+  star: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.8 5.5 21l2-7.5L2 9h7z"/></svg>',
+  utensils: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>',
+  trash: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>',
+  bed: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>',
+  towel: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="15" x2="16" y2="15"/></svg>',
+  plug: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>',
+  heart: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>',
+  wifi: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>',
+  key: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>',
+  clock: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  info: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>'
+};
+
+const ICON_OPTIONS = [
+  ["coffee","☕ Coffee"], ["star","⭐ Toys/Star"], ["utensils","🍽️ Food"], ["trash","🗑️ Trash"],
+  ["bed","🛏️ Linens"], ["towel","🧺 Towels"], ["plug","🔌 Chargers"], ["heart","🤍 Help/Heart"],
+  ["wifi","📶 Wi-Fi"], ["key","🔑 Key/Door"], ["clock","🕒 Time/Shul"], ["info","ℹ️ Info"]
+];
+
+const DEFAULT_EN = {
+  headline: "Welcome to the Goldstein Family!",
+  monogram: "G",
+  heGreet: "שבת שלום • ברוכים הבאים למשפחת גולדשטיין",
+  addr: "123 Oak Lane • Side Entrance",
+  welcome: "We truly love having you here — thank you for giving us the pleasure & zechus of hosting you!",
+  lockDoors: "Works on BOTH the Outside Door & Inside Door",
+  lockSub: "Memorize it before heading out — our porch chairs aren’t quite as cozy as your bed!",
+  stayInNote: "Whenever you arrive!",
+  stayOutNote: "Whenever you’re ready!",
+  stayJoke: "No bellhop needed, unlimited coffee refills, and late checkout is always pre-approved!",
+  sec1: "Help Yourself",
+  sec2: "A Few Sweet Favors",
+  footer: "So happy you’re here — we hope you have a wonderful, restful stay! • The Goldstein Family",
+  perks: [
+    { icon: "coffee", title: "Coffee, Tea & Fridge", body: "Coffee & tea right outside your room; milk & cold drinks in the fridge. Help yourself anytime!" },
+    { icon: "star", title: "Basement Playroom", body: "Kids are welcome to enjoy all the toys! Please put them back — we’ve stepped on enough rogue LEGOs." }
+  ],
+  favors: [
+    { icon: "utensils", title: "No Food in Guest Rooms", body: "Enjoy snacks in the kitchen/common area — crumbs invite tiny roommates who don’t pay rent." },
+    { icon: "trash", title: "Trash in the Bin", body: "Toss wrappers & bottles in the bin, and tie up the bag if full. Our bins love feeling useful!" },
+    { icon: "bed", title: "Strip the Linens", body: "Pile sheets & pillowcases on the bed before leaving. Don’t fold the fitted sheet — scientists say it’s impossible!" },
+    { icon: "towel", title: "Towels in One Spot", body: "Place used towels in the hamper or hanging in the bathroom so they don’t play hide-and-seek." },
+    { icon: "plug", title: "Quick Charger Sweep", body: "Check outlets & closets before checkout — we’re not trying to run a charger orphanage!" },
+    { icon: "heart", title: "Need Anything at All?", body: "Extra blankets, pillows, towels, or tissues — please don’t be shy, just ask!" }
+  ]
+};
+
+const DEFAULT_HE = {
+  headline: "ברוכים הבאים למשפחת גולדשטיין!",
+  monogram: "ג",
+  heGreet: "שבת שלום ומבורך",
+  addr: "123 Oak Lane • כניסה מהצד השמאלי",
+  welcome: "שמחים כל כך לארח אתכם — תודה על הזכות והעונג שבהכנסת אורחים!",
+  lockDoors: "הקוד פותח גם את הדלת החיצונית וגם את הדלת הפנימית",
+  lockSub: "נא לשנן את הקוד לפני היציאה — כיסאות המרפסת לא נוחים כמו המיטה!",
+  stayInNote: "מתי שתגיעו בשמחה!",
+  stayOutNote: "בלי לחץ בכלל!",
+  stayJoke: "קפה חופשי ללא הגבלה, 0% דמי נופש, וצ׳ק-אאוט מאוחר מאושר מראש!",
+  sec1: "הרגישו בבית",
+  sec2: "כמה בקשות קטנות לפני היציאה",
+  footer: "שמחים שאתם כאן — שתהיה שהייה נפלאה ורגועה! • משפחת גולדשטיין",
+  perks: [
+    { icon: "coffee", title: "קפה, תה ומקרר", body: "פינת קפה ותה מחוץ לחדר, וחלב ושתייה קרה במקרר — תתכבדו בחופשיות בכל שעה!" },
+    { icon: "star", title: "חדר משחקים במרתף", body: "הילדים מוזמנים ליהנות מכל המשחקים! נשמח להחזיר הכל למקום בסיום (כדי לא לדרוך על לגו)." }
+  ],
+  favors: [
+    { icon: "utensils", title: "ללא אוכל בחדרים", body: "אפשר לאכול בכיף במטבח ובפינת האוכל — פירורים מזמינים שותפים קטנים שלא משלמים שכירות." },
+    { icon: "trash", title: "אשפה לפח", body: "נא לזרוק עטיפות ובקבוקים לפח ולקשור את השקית אם היא מלאה." },
+    { icon: "bed", title: "הסרת מצעים", body: "נא להוריד ציפיות וסדינים לערימה מסודרת על המיטה (לא צריך לקפל סדין גומי!)." },
+    { icon: "towel", title: "מגבות במקום אחד", body: "נא להניח מגבות משומשות בסל הכביסה או תלויות בחדר הרחצה." },
+    { icon: "plug", title: "בדיקה מהירה למטענים", body: "נא לבדוק שקעים וארונות לפני העזיבה כדי שלא יישארו מטענים בודדים." },
+    { icon: "heart", title: "צריכים משהו?", body: "שמיכות, כריות, מגבות או טישו — אל תתביישו, פשוט תבקשו!" }
+  ]
+};
+
+const STORAGE_KEY = "frumhost_public_v1";
+let state = loadState();
+
+function deepClone(x) { return JSON.parse(JSON.stringify(x)); }
+function pad2(n) { return String(n).padStart(2, "0"); }
+function toYMD(d) { return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`; }
+function getUpcomingFriday(w = 0) {
+  const now = new Date();
+  const d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const dow = d.getDay();
+  let delta = (5 - dow + 7) % 7;
+  if (dow === 6) delta = -1;
+  d.setDate(d.getDate() + delta + w * 7);
+  return d;
+}
+function addDays(baseDate, n) {
+  const d = new Date(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate());
+  d.setDate(d.getDate() + n);
+  return d;
+}
+
+function loadState() {
+  const now = new Date();
+  const base = {
+    stayMode: "shabbos", design: "candles", theme: "navy", lang: "en", tier: "pro",
+    code: "C1234Z", zip: "08701", city: "Lakewood, NJ",
+    checkIn: toYMD(addDays(now, 3)), checkOut: toYMD(addDays(now, 5)), guestLabel: "",
+    blankZ: false, blankC: false, en: deepClone(DEFAULT_EN), he: deepClone(DEFAULT_HE)
+  };
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return base;
+    const saved = JSON.parse(raw);
+    return { ...base, ...saved, en: { ...deepClone(DEFAULT_EN), ...(saved.en || {}) }, he: { ...deepClone(DEFAULT_HE), ...(saved.he || {}) } };
+  } catch (_) { return base; }
+}
+
+function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (_) {} }
+function activeCopy() { return state.lang === "he" ? state.he : state.en; }
+function esc(s) { return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+function fmt12(iso, showAmPm = true) {
+  if (!iso) return "—";
+  const m = iso.match(/T(\d{2}):(\d{2})/);
+  if (!m) return iso;
+  let hh = parseInt(m[1], 10);
+  const mm = m[2];
+  const ampm = hh >= 12 ? "PM" : "AM";
+  hh = hh % 12 || 12;
+  return showAmPm ? `${hh}:${mm} ${ampm}` : `${hh}:${mm}`;
+}
+
+function fmtShortDate(ymd, isHe) {
+  if (!ymd) return "—";
+  const [y, m, d] = ymd.split("-").map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString(isHe ? "he-IL" : "en-US", { weekday: "short", month: "short", day: "numeric" });
+}
+
+function calcNights(a, b) {
+  if (!a || !b) return 0;
+  const [y1,m1,d1] = a.split("-").map(Number);
+  const [y2,m2,d2] = b.split("-").map(Number);
+  const diff = Math.round((new Date(y2,m2-1,d2) - new Date(y1,m1-1,d1)) / 86400000);
+  return diff > 0 ? diff : 0;
+}
+
+function setStatus(text, kind) {
+  const pill = $("statusPill"); pill.textContent = text;
+  pill.className = "status-pill" + (kind ? " " + kind : "");
+}
+
+function syncCodeInputs() { $("inCode").value = state.code; $("inCodeWk").value = state.code; $("inCodeNone").value = state.code; }
+
+function populateGeneralInputs() {
+  const c = activeCopy();
+  syncCodeInputs();
+  $("inZip").value = state.zip; $("inCity").value = state.city;
+  $("inCheckIn").value = state.checkIn; $("inCheckOut").value = state.checkOut; $("inGuestLabel").value = state.guestLabel || "";
+  $("chkBlankZmanim").checked = !!state.blankZ; $("chkBlankCode").checked = !!state.blankC;
+  $("inHeadline").value = c.headline; $("inMonogram").value = c.monogram || "G"; $("inAddr").value = c.addr;
+  $("inHeGreet").value = c.heGreet || ""; $("inWelcome").value = c.welcome;
+  $("inLockDoors").value = c.lockDoors; $("inLockSub").value = c.lockSub;
+  $("inStayInNote").value = c.stayInNote || ""; $("inStayOutNote").value = c.stayOutNote || ""; $("inStayJoke").value = c.stayJoke || "";
+  $("inSec1").value = c.sec1; $("inSec2").value = c.sec2; $("inFooter").value = c.footer;
+}
+
+function renderCardEditors() {
+  const c = activeCopy();
+  const locked = state.tier !== "pro";
+  renderOneList("perksEditorList", c.perks, "perks", locked);
+  renderOneList("favorsEditorList", c.favors, "favors", locked);
+  $("btnAddPerk").disabled = locked; $("btnAddFavor").disabled = locked;
+  $("btnAddPerk").style.opacity = locked ? "0.45" : "1"; $("btnAddFavor").style.opacity = locked ? "0.45" : "1";
+}
+
+function renderOneList(containerId, list, key, locked) {
+  const el = $(containerId); el.innerHTML = "";
+  list.forEach((item, idx) => {
+    const wrap = document.createElement("div");
+    wrap.className = "card-editor-item" + (locked ? " locked-block" : "");
+    const opts = ICON_OPTIONS.map(([k, lbl]) => `<option value="${k}" ${item.icon === k ? "selected" : ""}>${lbl}</option>`).join("");
+    wrap.innerHTML = `
+      <div class="cei-head"><span class="cei-num">Box #${idx + 1}</span>
+        <div class="cei-btns">
+          <button type="button" class="mini-btn" data-act="up" data-key="${key}" data-idx="${idx}" ${idx === 0 ? "disabled" : ""}>↑</button>
+          <button type="button" class="mini-btn" data-act="down" data-key="${key}" data-idx="${idx}" ${idx === list.length - 1 ? "disabled" : ""}>↓</button>
+          <button type="button" class="mini-btn danger" data-act="del" data-key="${key}" data-idx="${idx}">✕</button>
+        </div>
+      </div>
+      <div class="cei-row">
+        <div class="field"><label>Icon</label><select data-f="icon" data-key="${key}" data-idx="${idx}">${opts}</select></div>
+        <div class="field"><label>Title</label><input type="text" data-f="title" data-key="${key}" data-idx="${idx}" value="${esc(item.title)}" /></div>
+      </div>
+      <div class="field"><label>Text</label><textarea data-f="body" data-key="${key}" data-idx="${idx}">${esc(item.body)}</textarea></div>
+    `;
+    el.appendChild(wrap);
+  });
+}
+
+function applyTierLocks() {
+  const t = state.tier;
+  const banner = $("tierBanner");
+  if (t === "pro") banner.style.display = "none";
+  else if (t === "basic") { banner.style.display = "flex"; $("tierBannerText").innerHTML = "Previewing <strong>$9 Family Tier</strong>: Name, Address, 5 Colors, Bilingual &amp; Weekday Dates unlocked; Extra Art Designs &amp; Box Editor locked to $18 Pro."; }
+  else { banner.style.display = "flex"; $("tierBannerText").innerHTML = "Previewing <strong>Free Tier ($0)</strong>: Family Name + Lock Code + Zmanim + English or Hebrew unlocked; Address/Colors/Designs/Box Editor locked + FrumHost.com footer shown."; }
+
+  const proLocked = t !== "pro";
+  const basicLocked = t === "free";
+
+  document.querySelectorAll("#designStrip .style-btn").forEach(btn => {
+    const allowedDefault = (btn.dataset.design === "candles" || (state.stayMode !== "shabbos" && btn.dataset.design === "key"));
+    btn.style.opacity = (!allowedDefault && proLocked) ? "0.45" : "1";
+  });
+  document.querySelectorAll("#themeStrip .theme-btn").forEach(btn => { btn.style.opacity = (btn.dataset.theme !== "navy" && basicLocked) ? "0.45" : "1"; });
+  document.querySelectorAll("#langBar .chip-btn").forEach(btn => { btn.style.opacity = (btn.dataset.lang === "bi" && basicLocked) ? "0.45" : "1"; });
+  document.querySelectorAll("#stayModeBar .chip-btn").forEach(btn => { btn.style.opacity = (btn.dataset.mode === "weekday" && basicLocked) ? "0.45" : "1"; });
+
+  $("wrapHeadline").classList.toggle("locked-block", false);
+  $("wrapAddr").classList.toggle("locked-block", basicLocked);
+  ["wrapMonogram","wrapHeGreet","wrapWelcome","wrapLockDoors","wrapLockSub","wrapStayInNote","wrapStayOutNote","wrapStayJoke","wrapSec1","wrapSec2","wrapFooter"]
+    .forEach(id => $(id).classList.toggle("locked-block", proLocked));
+  $("chkBlankZmanim").disabled = proLocked;
+  $("chkBlankCode").disabled = proLocked;
+  $("outWatermark").style.display = "block";
+}
+
+function renderSign() {
+  const c = activeCopy();
+  const isHe = state.lang === "he";
+  const isBi = state.lang === "bi";
+  const mode = state.stayMode;
+
+  document.documentElement.setAttribute("data-theme", state.theme);
+  $("signCard").classList.toggle("rtl-mode", isHe);
+
+  $("shabbosQuickControls").style.display = mode === "shabbos" ? "block" : "none";
+  $("weekdayQuickControls").style.display = mode === "weekday" ? "block" : "none";
+  $("noneQuickControls").style.display = mode === "none" ? "block" : "none";
+
+  const imgFile = DESIGN_FILES[state.design];
+  if (imgFile) {
+    $("outBannerImg").src = imgFile; $("outBannerImg").style.display = "block"; $("outMonogramWrap").style.display = "none";
+  } else {
+    $("outBannerImg").style.display = "none"; $("outMonogramWrap").style.display = "inline-flex";
+    $("outMonogramChar").textContent = (c.monogram || "G").trim() || "G";
+  }
+
+  const heGreetEl = $("outHeGreet");
+  if (isBi && (c.heGreet || "").trim()) {
+    heGreetEl.textContent = mode === "weekday" ? c.heGreet.replace(/^שבת שלום\s*[•\-–]\s*/, "") : c.heGreet.trim();
+    heGreetEl.style.display = "block";
+  } else heGreetEl.style.display = "none";
+
+  $("outHeadline").textContent = c.headline;
+  const addrParts = (c.addr || "").split("•").map(s => s.trim()).filter(Boolean);
+  $("outAddr").innerHTML = addrParts.length > 1 ? addrParts.map(esc).join('<span class="dot">&bull;</span>') : esc(c.addr);
+  $("outWelcome").textContent = c.welcome;
+
+  $("outCode").textContent = (state.code || "C1234Z").toUpperCase();
+  $("outCode").style.display = state.blankC ? "none" : "block";
+  $("outCodeBlank").style.display = state.blankC ? "block" : "none";
+  if (mode === "weekday") $("outLockEyebrow").textContent = isHe ? "קוד כניסה לבית" : (isBi ? "DOOR ENTRY CODE • קוד כניסה" : "Guest Door Entry Code");
+  else if (isHe) $("outLockEyebrow").textContent = state.blankZ && !state.blankC ? "קוד מנעול שבת" : "קוד מנעול שבת • השבוע";
+  else if (isBi) $("outLockEyebrow").textContent = state.blankZ && !state.blankC ? "SHABBOS LOCK CODE • קוד שבת" : "SHABBOS LOCK CODE • קוד שבת השבוע";
+  else $("outLockEyebrow").textContent = state.blankZ && !state.blankC ? "Shabbos Lock Code" : "Shabbos Lock Code • This Week";
+  $("outLockDoors").textContent = c.lockDoors;
+  $("outLockSub").textContent = c.lockSub;
+
+  $("zmanimFilledBox").style.display = (mode === "shabbos" && !state.blankZ) ? "block" : "none";
+  $("zmanimBlankBox").style.display = (mode === "shabbos" && state.blankZ) ? "block" : "none";
+  $("weekdayStayBox").style.display = (mode === "weekday") ? "block" : "none";
+
+  const nights = calcNights(state.checkIn, state.checkOut);
+  const gName = (state.guestLabel || "").trim();
+  if (isHe) {
+    $("outStayHead").textContent = gName ? `השהייה של ${gName} אצלנו` : "פרטי השהייה שלכם אצלנו";
+    $("lblCheckIn").textContent = "הגעה (צ׳ק-אין)"; $("lblCheckOut").textContent = "עזיבה (צ׳ק-אאוט)"; $("lblRate").textContent = "דמי נופש";
+    $("outRateVal").textContent = "0% (על חשבון הבית)";
+    $("outNightsCount").textContent = nights > 0 ? `${nights} לילות • אירוח 5 כוכבים` : "אירוח 5 כוכבים";
+  } else {
+    $("outStayHead").textContent = gName ? `Welcome, ${gName} • Your Stay` : "Your Stay With Us";
+    $("lblCheckIn").textContent = "Check-In"; $("lblCheckOut").textContent = "Check-Out"; $("lblRate").textContent = "Resort Fee";
+    $("outRateVal").textContent = "0% (On the House)";
+    $("outNightsCount").textContent = nights > 0 ? `${nights} Night${nights > 1 ? "s" : ""} • 5-Star Hospitality` : "5-Star Hospitality";
+  }
+  $("outCheckInDate").textContent = fmtShortDate(state.checkIn, isHe);
+  $("outCheckOutDate").textContent = fmtShortDate(state.checkOut, isHe);
+  $("outStayInNote").textContent = c.stayInNote || "";
+  $("outStayOutNote").textContent = c.stayOutNote || "";
+  $("outStayJoke").textContent = c.stayJoke || "";
+
+  const parshaEn = ($("inParsha").value || "—").trim();
+  const parshaHe = ($("inParshaHe").value || "").trim();
+  const hdateEn = ($("inHdate").value || "").trim();
+  const hdateHe = ($("inHdateHe").value || "").trim();
+  const candles = ($("inCandles").value || "—").trim();
+  const shkiah = ($("inShkiah").value || "").trim();
+  const shema = ($("inShema").value || "—").trim();
+  const motzei72 = ($("inMotzei72").value || "—").trim();
+  const motzeiSub = ($("inMotzeiSub").value || "").trim();
+
+  if (isHe) {
+    $("lblParsha").textContent = "פרשת השבוע"; $("lblCandles").textContent = "הדלקת נרות"; $("lblShema").textContent = "סוף זמן ק״ש";
+    $("lblShemaSub").textContent = "מג״א • גר״א"; $("lblMotzei").textContent = "מוצאי שבת";
+    $("outParsha").textContent = parshaHe || parshaEn; $("outHdate").textContent = hdateHe || hdateEn || " ";
+    $("outCandles").textContent = candles; $("outShkiah").textContent = shkiah ? `שקיעה ${shkiah}` : " ";
+    $("outShema").textContent = shema; $("outMotzei72").textContent = motzei72; $("outMotzeiSub").textContent = motzeiSub || " ";
+    $("outZmanHead").textContent = `זמני שבת • ${parshaHe || parshaEn} • ${state.city}`;
+    $("outZmanHeadBlank").textContent = `זמני שבת • ${state.city}`;
+    $("blParsha").textContent = "פרשת השבוע"; $("blCandles").textContent = "הדלקת נרות"; $("blShema").textContent = "סוף זמן קריאת שמע"; $("blMotzei").textContent = "מוצאי שבת / ר״ת 72";
+  } else if (isBi) {
+    $("lblParsha").textContent = "Parsha • פרשה"; $("lblCandles").textContent = "Licht Bentchen • הדלק״נ"; $("lblShema").textContent = "Krias Shema • סוזק״ש";
+    $("lblShemaSub").textContent = "MGA • GRA"; $("lblMotzei").textContent = "Motzei Shabbos • מוצ״ש";
+    $("outParsha").innerHTML = parshaHe ? `<span class="he-font" dir="rtl">${esc(parshaHe)}</span>` : esc(parshaEn);
+    $("outHdate").innerHTML = hdateHe ? `${esc(parshaEn)} • <span class="he-sans" dir="rtl">${esc(hdateHe)}</span>` : esc(hdateEn);
+    $("outCandles").textContent = candles; $("outShkiah").textContent = shkiah ? `Shkiah ${shkiah}` : " ";
+    $("outShema").textContent = shema; $("outMotzei72").textContent = motzei72; $("outMotzeiSub").textContent = motzeiSub || " ";
+    $("outZmanHead").textContent = `Zmanim This Week • ${parshaHe || parshaEn} • ${state.city}`;
+    $("outZmanHeadBlank").textContent = `Zmanim This Week • זמני שבת • ${state.city}`;
+    $("blParsha").textContent = "Parsha • פרשת השבוע"; $("blCandles").textContent = "Licht Bentchen • הדלקת נרות"; $("blShema").textContent = "Sof Zman Krias Shema • סוזק״ש"; $("blMotzei").textContent = "Motzei Shabbos / 72 • מוצ״ש";
+  } else {
+    $("lblParsha").textContent = "Parsha"; $("lblCandles").textContent = "Licht Bentchen"; $("lblShema").textContent = "Sof Zman Krias Shema";
+    $("lblShemaSub").textContent = "MGA • GRA"; $("lblMotzei").textContent = "Motzei Shabbos";
+    $("outParsha").textContent = parshaEn; $("outHdate").textContent = hdateEn || " ";
+    $("outCandles").textContent = candles; $("outShkiah").textContent = shkiah ? `Shkiah ${shkiah}` : " ";
+    $("outShema").textContent = shema; $("outMotzei72").textContent = motzei72; $("outMotzeiSub").textContent = motzeiSub || " ";
+    const pHead = parshaEn && parshaEn !== "—" ? `Parshas ${parshaEn.replace(/^Parasha?t?\s+/i, "")}` : "";
+    $("outZmanHead").textContent = ["Zmanim This Week", pHead, state.city].filter(Boolean).join(" • ");
+    $("outZmanHeadBlank").textContent = `Zmanim This Week • ${state.city}`;
+    $("blParsha").textContent = "Parsha"; $("blCandles").textContent = "Licht Bentchen (Candle Lighting)"; $("blShema").textContent = "Sof Zman Krias Shema"; $("blMotzei").textContent = "Motzei Shabbos / 72 Min";
+  }
+
+  $("outSec1").textContent = c.sec1; $("outSec2").textContent = c.sec2;
+  $("outPerksGrid").innerHTML = c.perks.map(item => `
+    <div class="perk-card"><div class="icon-badge">${ICONS[item.icon] || ICONS.star}</div>
+      <div><div class="card-title">${esc(item.title)}</div><p class="card-body">${esc(item.body)}</p></div>
+    </div>`).join("");
+  $("outFavorsGrid").innerHTML = c.favors.map(item => `
+    <div class="favor-tile"><div class="icon-badge gold">${ICONS[item.icon] || ICONS.heart}</div>
+      <div><div class="card-title">${esc(item.title)}</div><p class="card-body">${esc(item.body)}</p></div>
+    </div>`).join("");
+  $("outFooter").textContent = c.footer;
+
+  const totalBoxes = c.perks.length + c.favors.length;
+  const needCompact = (mode === "shabbos" && state.blankZ) || totalBoxes > 8 || (isBi && totalBoxes >= 8) || (mode === "weekday" && totalBoxes >= 8);
+  $("signCard").classList.toggle("compact", needCompact);
+
+  applyTierLocks(); saveState(); fitPreview();
+}
+
+async function fetchWeeklyZmanim(fridayStr) {
+  const zip = (state.zip || "08701").trim();
+  const [gy, gm, gd] = fridayStr.split("-").map(Number);
+  const satStr = toYMD(new Date(gy, gm - 1, gd + 1));
+
+  setStatus("Pulling live Zmanim…", "loading");
+  try {
+    const [rShab, rFri, rSat, rConv] = await Promise.all([
+      fetch(`https://www.hebcal.com/shabbat?cfg=json&zip=${encodeURIComponent(zip)}&M=on&b=18&gy=${gy}&gm=${gm}&gd=${gd}`).then(r => r.json()),
+      fetch(`https://www.hebcal.com/zmanim?cfg=json&zip=${encodeURIComponent(zip)}&date=${fridayStr}`).then(r => r.json()),
+      fetch(`https://www.hebcal.com/zmanim?cfg=json&zip=${encodeURIComponent(zip)}&date=${satStr}`).then(r => r.json()),
+      fetch(`https://www.hebcal.com/converter?cfg=json&date=${satStr}&g2h=1&strict=1`).then(r => r.json())
+    ]);
+    if (rShab.location && rShab.location.city && rShab.location.admin1) {
+      state.city = `${rShab.location.city}, ${rShab.location.admin1}`; $("inCity").value = state.city;
+    }
+    const items = rShab.items || [];
+    const parshaItem = items.find(i => i.category === "parashat") || items.find(i => i.category === "holiday");
+    const candleItem = items.find(i => i.category === "candles");
+    const parshaName = parshaItem ? parshaItem.title.replace(/^Parashat\s+/i, "") : (candleItem && candleItem.memo ? candleItem.memo.replace(/^Parashat\s+/i, "") : "Shabbos");
+
+    $("inParsha").value = parshaName;
+    $("inParshaHe").value = (parshaItem && parshaItem.hebrew) ? parshaItem.hebrew : "";
+    $("inHdate").value = (parshaItem && parshaItem.hdate) ? parshaItem.hdate : (rConv.hd ? `${rConv.hd} ${rConv.hm} ${rConv.hy}` : "");
+    $("inHdateHe").value = rConv.hebrew || "";
+
+    const friT = rFri.times || {}; const satT = rSat.times || {};
+    $("inCandles").value = candleItem ? fmt12(candleItem.date, true) : "—";
+    $("inShkiah").value = fmt12(friT.sunset, true);
+    $("inShema").value = `${fmt12(satT.sofZmanShmaMGA, false)} / ${fmt12(satT.sofZmanShma, false)}`;
+    $("inMotzei72").value = fmt12(satT.tzeit72min, true);
+    $("inMotzeiSub").value = `Reg ${fmt12(satT.tzeit85deg, false)} • 50m ${fmt12(satT.tzeit50min, false)}`;
+
+    setStatus(`Live • ${parshaName}`, "");
+    renderSign();
+  } catch (err) {
+    console.error(err);
+    setStatus("Offline — edit manually", "err");
+    renderSign();
+  }
+}
+
+function fitPreview() {
+  const stage = $("previewStage"), scaler = $("previewScaler"), card = $("signCard");
+  if (!stage || !scaler || !card) return;
+  const scale = Math.min(1, stage.clientWidth / (card.offsetWidth || 766));
+  scaler.style.transform = scale < 1 ? `scale(${scale})` : "none";
+  stage.style.height = Math.ceil((card.offsetHeight || 1002) * scale + 16) + "px";
+}
+
+function buildWhatsAppText() {
+  const c = activeCopy(), isHe = state.lang === "he";
+  const lines = [
+    `*${c.headline}*`, `📍 *${c.addr}*`, c.welcome, ``,
+    `🔐 *${state.stayMode === "weekday" ? "DOOR ENTRY CODE" : "SHABBOS LOCK CODE"}:* *${(state.code || "C1234Z").toUpperCase()}*`,
+    `_${c.lockDoors} — ${c.lockSub}_`
+  ];
+  if (state.stayMode === "shabbos") {
+    const parsha = ($("inParsha").value || "").trim(), parshaHe = ($("inParshaHe").value || "").trim();
+    lines.push(``, `🕯️ *Zmanim (${state.city}) — ${parsha}${parshaHe ? ` / ${parshaHe}` : ""}*`,
+      `• *Licht Bentchen:* ${$("inCandles").value}`, `• *Sof Zman Krias Shema:* ${$("inShema").value} (MGA / GRA)`,
+      `• *Motzei Shabbos:* ${$("inMotzei72").value} (72) | ${$("inMotzeiSub").value}`);
+  } else if (state.stayMode === "weekday") {
+    lines.push(``, `🗓️ *Your Stay:* ${fmtShortDate(state.checkIn, isHe)} → ${fmtShortDate(state.checkOut, isHe)}`, `_${c.stayJoke}_`);
+  }
+  lines.push(``, `*${c.sec1}*`, ...c.perks.map(p => `• *${p.title}:* ${p.body}`), ``, `*${c.sec2}*`, ...c.favors.map((f, i) => `${i + 1}. *${f.title}:* ${f.body}`), ``, c.footer);
+  return lines.join("\n");
+}
+
+function syncActiveButtons() {
+  document.querySelectorAll("#stayModeBar .chip-btn").forEach(b => b.classList.toggle("active", b.dataset.mode === state.stayMode));
+  document.querySelectorAll("#designStrip .style-btn").forEach(b => b.classList.toggle("active", b.dataset.design === state.design));
+  document.querySelectorAll("#themeStrip .theme-btn").forEach(b => b.classList.toggle("active", b.dataset.theme === state.theme));
+  document.querySelectorAll("#langBar .chip-btn").forEach(b => b.classList.toggle("active", b.dataset.lang === state.lang));
+  document.querySelectorAll("#tabTiers [data-tier]").forEach(b => b.classList.toggle("active", b.dataset.tier === state.tier));
+}
+function setActiveWeekChip(id) { ["btnThisWeek", "btnNextWeek", "btnPlus2"].forEach(b => $(b).classList.toggle("active", b === id)); }
+
+(function init() {
+  syncActiveButtons(); populateGeneralInputs(); renderCardEditors();
+  const fri = toYMD(getUpcomingFriday(0)); $("inFriday").value = fri;
+  renderSign(); fetchWeeklyZmanim(fri);
+
+  document.querySelectorAll("#stayModeBar .chip-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (state.tier === "free" && btn.dataset.mode === "weekday") { alert("Weekday Stay Dates mode is unlocked in the $9 Family tier!"); return; }
+      const prev = state.stayMode; state.stayMode = btn.dataset.mode;
+      if (state.stayMode !== "shabbos" && (state.design === "candles" || state.design === "kiddush")) state.design = "key";
+      else if (state.stayMode === "shabbos" && prev !== "shabbos" && state.design === "key") state.design = "candles";
+      syncActiveButtons(); renderSign();
+    });
+  });
+
+  document.querySelectorAll("#designStrip .style-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const allowedDefault = (btn.dataset.design === "candles" || (state.stayMode !== "shabbos" && btn.dataset.design === "key"));
+      if (state.tier !== "pro" && !allowedDefault) { alert("All 5 Luxury Art Designs are unlocked in the $18 Pro Host tier!"); return; }
+      state.design = btn.dataset.design; syncActiveButtons(); renderSign();
+    });
+  });
+
+  document.querySelectorAll("#themeStrip .theme-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (state.tier === "free" && btn.dataset.theme !== "navy") { alert("Luxury Color Palettes are unlocked in the $9 Family tier!"); return; }
+      state.theme = btn.dataset.theme; syncActiveButtons(); renderSign();
+    });
+  });
+
+  document.querySelectorAll("#langBar .chip-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (state.tier === "free" && btn.dataset.lang === "bi") { alert("Bilingual (Eng + עברית) is unlocked in the $9 Family tier!"); return; }
+      state.lang = btn.dataset.lang; syncActiveButtons(); populateGeneralInputs(); renderCardEditors(); renderSign();
+    });
+  });
+
+  document.querySelectorAll("#tabTiers [data-tier]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      state.tier = btn.dataset.tier;
+      if (state.tier === "free") {
+        state.theme = "navy"; if (state.lang === "bi") state.lang = "en";
+        if (state.stayMode === "weekday") state.stayMode = "shabbos";
+        state.design = state.stayMode === "shabbos" ? "candles" : "key";
+        state.blankZ = false; state.blankC = false;
+      } else if (state.tier === "basic") {
+        if (!["candles","key"].includes(state.design)) state.design = state.stayMode === "shabbos" ? "candles" : "key";
+        state.blankZ = false; state.blankC = false;
+      }
+      syncActiveButtons(); populateGeneralInputs(); renderCardEditors(); renderSign();
+    });
+  });
+  $("btnBackToOwner").addEventListener("click", () => { state.tier = "pro"; syncActiveButtons(); renderCardEditors(); renderSign(); });
+
+  $("btnThisWeek").addEventListener("click", () => { setActiveWeekChip("btnThisWeek"); const f = toYMD(getUpcomingFriday(0)); $("inFriday").value = f; fetchWeeklyZmanim(f); });
+  $("btnNextWeek").addEventListener("click", () => { setActiveWeekChip("btnNextWeek"); const f = toYMD(getUpcomingFriday(1)); $("inFriday").value = f; fetchWeeklyZmanim(f); });
+  $("btnPlus2").addEventListener("click", () => { setActiveWeekChip("btnPlus2"); const f = toYMD(getUpcomingFriday(2)); $("inFriday").value = f; fetchWeeklyZmanim(f); });
+  $("inFriday").addEventListener("change", () => { setActiveWeekChip(""); if ($("inFriday").value) fetchWeeklyZmanim($("inFriday").value); });
+
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b === btn));
+      document.querySelectorAll(".tab-pane").forEach(p => p.classList.toggle("active", p.id === btn.dataset.tab));
+    });
+  });
+
+  ["inCode","inCodeWk","inCodeNone"].forEach(id => {
+    $(id).addEventListener("input", () => { state.code = $(id).value.toUpperCase(); syncCodeInputs(); renderSign(); });
+  });
+  $("inCheckIn").addEventListener("change", () => { state.checkIn = $("inCheckIn").value; renderSign(); });
+  $("inCheckOut").addEventListener("change", () => { state.checkOut = $("inCheckOut").value; renderSign(); });
+  $("inGuestLabel").addEventListener("input", () => { state.guestLabel = $("inGuestLabel").value; renderSign(); });
+
+  const bindVal = (id, fn) => $(id).addEventListener("input", () => { fn($(id).value); renderSign(); });
+  bindVal("inCity", v => state.city = v);
+  bindVal("inHeadline", v => activeCopy().headline = v);
+  bindVal("inMonogram", v => activeCopy().monogram = v.toUpperCase());
+  bindVal("inAddr", v => activeCopy().addr = v);
+  bindVal("inHeGreet", v => activeCopy().heGreet = v);
+  bindVal("inWelcome", v => activeCopy().welcome = v);
+  bindVal("inLockDoors", v => activeCopy().lockDoors = v);
+  bindVal("inLockSub", v => activeCopy().lockSub = v);
+  bindVal("inStayInNote", v => activeCopy().stayInNote = v);
+  bindVal("inStayOutNote", v => activeCopy().stayOutNote = v);
+  bindVal("inStayJoke", v => activeCopy().stayJoke = v);
+  bindVal("inSec1", v => activeCopy().sec1 = v);
+  bindVal("inSec2", v => activeCopy().sec2 = v);
+  bindVal("inFooter", v => activeCopy().footer = v);
+
+  $("chkBlankZmanim").addEventListener("change", () => { state.blankZ = $("chkBlankZmanim").checked; renderSign(); });
+  $("chkBlankCode").addEventListener("change", () => { state.blankC = $("chkBlankCode").checked; renderSign(); });
+  $("inZip").addEventListener("change", () => { state.zip = $("inZip").value.trim() || "08701"; saveState(); fetchWeeklyZmanim($("inFriday").value); });
+  ["inParsha","inParshaHe","inHdate","inHdateHe","inCandles","inShkiah","inShema","inMotzei72","inMotzeiSub"].forEach(id => $(id).addEventListener("input", renderSign));
+
+  ["perksEditorList", "favorsEditorList"].forEach(listId => {
+    const upd = (e) => { const t = e.target; if (!t.dataset.f) return; activeCopy()[t.dataset.key][Number(t.dataset.idx)][t.dataset.f] = t.value; renderSign(); };
+    $(listId).addEventListener("input", upd); $(listId).addEventListener("change", upd);
+    $(listId).addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-act]"); if (!btn) return;
+      const arr = activeCopy()[btn.dataset.key], idx = Number(btn.dataset.idx), act = btn.dataset.act;
+      if (act === "up" && idx > 0) [arr[idx-1], arr[idx]] = [arr[idx], arr[idx-1]];
+      else if (act === "down" && idx < arr.length - 1) [arr[idx+1], arr[idx]] = [arr[idx], arr[idx+1]];
+      else if (act === "del") arr.splice(idx, 1);
+      renderCardEditors(); renderSign();
+    });
+  });
+
+  $("btnAddPerk").addEventListener("click", () => { activeCopy().perks.push({ icon: "info", title: state.lang === "he" ? "כותרת חדשה" : "New Guest Note", body: state.lang === "he" ? "כתבו כאן פרטים לאורחים..." : "Add your custom details here..." }); renderCardEditors(); renderSign(); });
+  $("btnAddFavor").addEventListener("click", () => { activeCopy().favors.push({ icon: "wifi", title: state.lang === "he" ? "ווייפיי ופרטים" : "Wi-Fi & House Info", body: state.lang === "he" ? "כתבו כאן פרטים נוספים..." : "Add your custom note or Wi-Fi info here..." }); renderCardEditors(); renderSign(); });
+  $("btnRefetch").addEventListener("click", () => fetchWeeklyZmanim($("inFriday").value));
+  $("btnResetAll").addEventListener("click", () => { if (!confirm("Reset all customized text and boxes back to defaults?")) return; localStorage.removeItem(STORAGE_KEY); state = loadState(); syncActiveButtons(); populateGeneralInputs(); renderCardEditors(); renderSign(); });
+  $("btnPrint").addEventListener("click", () => window.print());
+  $("btnCopyWa").addEventListener("click", async () => {
+    if (state.tier === "free") { alert("1-tap WhatsApp Copy is unlocked in the $9 Family tier!"); return; }
+    const txt = buildWhatsAppText(), btn = $("btnCopyWa");
+    try { await navigator.clipboard.writeText(txt); } catch (_) { const ta = document.createElement("textarea"); ta.value = txt; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); }
+    btn.textContent = "✅ Copied!"; setTimeout(() => { btn.textContent = "💬 Copy WhatsApp"; }, 2200);
+  });
+
+  window.addEventListener("resize", fitPreview);
+  window.addEventListener("load", fitPreview);
+  setTimeout(fitPreview, 120);
+})();
+</script>
+</body>
+</html>
